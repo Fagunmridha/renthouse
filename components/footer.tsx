@@ -183,7 +183,7 @@ export function Footer() {
               <Link href="/privacy" className="hover:text-accent transition-colors duration-300">
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-accent transition-colors duration-300">
+              <Link href="/terms" className="hover:text-accent transition-colors duration-300">
                 Terms of Service
               </Link>
               <div className="flex items-center gap-1">
