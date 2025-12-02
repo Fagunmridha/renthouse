@@ -51,6 +51,7 @@ const stats = [
 
 export default function HomePage() {
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchFeaturedProperties = async () => {
@@ -58,11 +59,14 @@ export default function HomePage() {
         const response = await fetch("/api/properties")
         if (response.ok) {
           const allProperties = await response.json()
+          // Filter featured and available properties
           const featured = allProperties.filter((p: Property) => p.featured && p.available).slice(0, 6)
           setFeaturedProperties(featured)
         }
       } catch (error) {
         console.error("Error fetching featured properties:", error)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -203,11 +207,32 @@ export default function HomePage() {
                 </Link>
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {featuredProperties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
-            </div>
+            {loading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-[4/3] bg-muted rounded-xl mb-4" />
+                    <div className="h-6 bg-muted rounded mb-2" />
+                    <div className="h-4 bg-muted rounded w-2/3" />
+                  </div>
+                ))}
+              </div>
+            ) : featuredProperties.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {featuredProperties.map((property) => (
+                  <PropertyCard key={property.id} property={property} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground text-lg mb-4">
+                  No featured properties available yet. Check back soon!
+                </p>
+                <Button variant="outline" asChild>
+                  <Link href="/properties">Browse All Properties</Link>
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 
