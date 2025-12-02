@@ -2,10 +2,12 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin, Bed, DollarSign, Users, Star } from "lucide-react"
+import { useState, useEffect } from "react"
+import { MapPin, Bed, DollarSign, Users, Star, Heart } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { addToFavorites, removeFromFavorites, isFavorite } from "@/lib/mock-data"
 import type { Property, FamilyType } from "@/lib/types"
 
 const familyTypeLabels: Record<FamilyType, string> = {
@@ -19,6 +21,33 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {
+  const [favorited, setFavorited] = useState(() => isFavorite(property.id))
+
+  useEffect(() => {
+    const checkFavorite = () => {
+      setFavorited(isFavorite(property.id))
+    }
+    checkFavorite()
+    
+    // Listen for storage changes
+    window.addEventListener("storage", checkFavorite)
+    return () => window.removeEventListener("storage", checkFavorite)
+  }, [property.id])
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (favorited) {
+      removeFromFavorites(property.id)
+      setFavorited(false)
+    } else {
+      addToFavorites(property.id)
+      setFavorited(true)
+    }
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new CustomEvent("favorites-changed"))
+  }
+
   return (
     <Card className="group overflow-hidden transition-all hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -34,6 +63,17 @@ export function PropertyCard({ property }: PropertyCardProps) {
             Featured
           </Badge>
         )}
+        <Button
+          variant="ghost"
+          size="icon"
+          className={`absolute top-3 right-3 h-9 w-9 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background/90 ${
+            favorited ? "text-red-500" : "text-muted-foreground"
+          }`}
+          onClick={handleFavoriteClick}
+          aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+        >
+          <Heart className={`h-5 w-5 ${favorited ? "fill-current" : ""}`} />
+        </Button>
         {!property.available && (
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
             <Badge variant="secondary" className="text-lg">

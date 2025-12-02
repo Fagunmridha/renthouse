@@ -272,3 +272,37 @@ export function setCurrentUser(user: User | null) {
     }
   }
 }
+
+// Favorites helpers
+export function getFavorites(): string[] {
+  if (typeof window === "undefined") return []
+  const stored = localStorage.getItem("rent-house-favorites")
+  return stored ? JSON.parse(stored) : []
+}
+
+export function addToFavorites(propertyId: string) {
+  if (typeof window === "undefined") return
+  const favorites = getFavorites()
+  if (!favorites.includes(propertyId)) {
+    favorites.push(propertyId)
+    localStorage.setItem("rent-house-favorites", JSON.stringify(favorites))
+  }
+}
+
+export function removeFromFavorites(propertyId: string) {
+  if (typeof window === "undefined") return
+  const favorites = getFavorites()
+  const updated = favorites.filter((id) => id !== propertyId)
+  localStorage.setItem("rent-house-favorites", JSON.stringify(updated))
+}
+
+export function isFavorite(propertyId: string): boolean {
+  const favorites = getFavorites()
+  return favorites.includes(propertyId)
+}
+
+export function getFavoriteProperties(): Property[] {
+  const favorites = getFavorites()
+  const properties = getStoredProperties()
+  return properties.filter((p) => favorites.includes(p.id))
+}
