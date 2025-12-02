@@ -2,13 +2,14 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import { ArrowRight, Home, Shield, Users, Search, TrendingUp, CheckCircle2, Zap } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { HeroSearch } from "@/components/hero-search"
 import { PropertyCard } from "@/components/property-card"
 import { Button } from "@/components/ui/button"
-import { mockProperties } from "@/lib/mock-data"
+import type { Property } from "@/lib/types"
 
 const features = [
   {
@@ -49,7 +50,24 @@ const stats = [
 ]
 
 export default function HomePage() {
-  const featuredProperties = mockProperties.filter((p) => p.featured && p.available).slice(0, 6)
+  const [featuredProperties, setFeaturedProperties] = useState<Property[]>([])
+
+  useEffect(() => {
+    const fetchFeaturedProperties = async () => {
+      try {
+        const response = await fetch("/api/properties")
+        if (response.ok) {
+          const allProperties = await response.json()
+          const featured = allProperties.filter((p: Property) => p.featured && p.available).slice(0, 6)
+          setFeaturedProperties(featured)
+        }
+      } catch (error) {
+        console.error("Error fetching featured properties:", error)
+      }
+    }
+
+    fetchFeaturedProperties()
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col">

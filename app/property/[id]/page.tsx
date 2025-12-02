@@ -13,7 +13,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getStoredProperties } from "@/lib/mock-data"
 import type { Property, FamilyType } from "@/lib/types"
 
 const familyTypeLabels: Record<FamilyType, string> = {
@@ -29,10 +28,24 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const properties = getStoredProperties()
-    const found = properties.find((p) => p.id === id)
-    setProperty(found || null)
-    setLoading(false)
+    const fetchProperty = async () => {
+      try {
+        const response = await fetch(`/api/properties/${id}`)
+        if (response.ok) {
+          const data = await response.json()
+          setProperty(data)
+        } else {
+          setProperty(null)
+        }
+      } catch (error) {
+        console.error("Error fetching property:", error)
+        setProperty(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProperty()
   }, [id])
 
   if (loading) {

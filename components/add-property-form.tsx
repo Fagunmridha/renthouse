@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/hooks/use-toast"
 import type { Property, FamilyType } from "@/lib/types"
-import { locations, getStoredProperties, setStoredProperties, getCurrentUser } from "@/lib/mock-data"
+import { locations, getCurrentUser } from "@/lib/mock-data"
 
 const familyTypes: { value: FamilyType; label: string }[] = [
   { value: "SMALL_FAMILY", label: "Small Family" },
@@ -84,66 +84,89 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
       return
     }
 
-   
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      if (isEditing && property) {
+        // Update existing property
+        const updatedProperty: Property = {
+          ...property,
+          title: formData.title,
+          description: formData.description,
+          location: formData.location,
+          familyType: formData.familyType as FamilyType,
+          price: Number(formData.price),
+          rooms: Number(formData.rooms),
+          terms: formData.terms,
+          available: formData.available,
+          featured: formData.featured,
+          images: images.length > 0 ? images : ["/cozy-suburban-house.png"],
+        }
 
-    const properties = getStoredProperties()
+        const response = await fetch(`/api/properties/${property.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProperty),
+        })
 
-    if (isEditing && property) {
-      const updatedProperty: Property = {
-        ...property,
-        title: formData.title,
-        description: formData.description,
-        location: formData.location,
-        familyType: formData.familyType as FamilyType,
-        price: Number(formData.price),
-        rooms: Number(formData.rooms),
-        terms: formData.terms,
-        available: formData.available,
-        featured: formData.featured,
-        images: images.length > 0 ? images : ["/cozy-suburban-house.png"],
+        if (response.ok) {
+          toast({
+            title: "Property updated!",
+            description: "Your property has been updated successfully.",
+          })
+          router.push("/dashboard/my-properties")
+        } else {
+          throw new Error("Failed to update property")
+        }
+      } else {
+        // Create new property
+        const newProperty: Property = {
+          id: `prop-${Date.now()}`,
+          title: formData.title,
+          description: formData.description,
+          location: formData.location,
+          familyType: formData.familyType as FamilyType,
+          price: Number(formData.price),
+          rooms: Number(formData.rooms),
+          terms: formData.terms,
+          available: formData.available,
+          featured: formData.featured,
+          images: images.length > 0 ? images : ["/cozy-suburban-house.png"],
+          ownerId: user.id,
+          ownerName: user.name,
+          ownerEmail: user.email,
+          ownerPhone: user.phone || "",
+          createdAt: new Date(),
+        }
+
+        const response = await fetch("/api/properties", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newProperty),
+        })
+
+        if (response.ok) {
+          toast({
+            title: "Property added!",
+            description: "Your property has been added successfully.",
+          })
+          router.push("/dashboard/my-properties")
+        } else {
+          throw new Error("Failed to add property")
+        }
       }
-
-      const index = properties.findIndex((p) => p.id === property.id)
-      if (index !== -1) {
-        properties[index] = updatedProperty
-        setStoredProperties(properties)
-      }
-
+    } catch (error) {
+      console.error("Error saving property:", error)
       toast({
-        title: "Property updated!",
-        description: "Your property has been updated successfully.",
+        title: "Error",
+        description: "Failed to save property. Please try again.",
+        variant: "destructive",
       })
-    } else {
-      const newProperty: Property = {
-        id: `prop-${Date.now()}`,
-        title: formData.title,
-        description: formData.description,
-        location: formData.location,
-        familyType: formData.familyType as FamilyType,
-        price: Number(formData.price),
-        rooms: Number(formData.rooms),
-        terms: formData.terms,
-        available: formData.available,
-        featured: formData.featured,
-        images: images.length > 0 ? images : ["/cozy-suburban-house.png"],
-        ownerId: user.id,
-        ownerName: user.name,
-        ownerEmail: user.email,
-        ownerPhone: user.phone || "",
-        createdAt: new Date(),
-      }
-
-      setStoredProperties([...properties, newProperty])
-
-      toast({
-        title: "Property added!",
-        description: "Your property has been added successfully.",
-      })
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
-    router.push("/dashboard/my-properties")
   }
 
   return (

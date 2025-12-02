@@ -5,7 +5,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { PropertyGrid } from "@/components/property-grid"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getFavoriteProperties } from "@/lib/mock-data"
+import { getFavorites } from "@/lib/mock-data"
 import type { Property } from "@/lib/types"
 import { Heart } from "lucide-react"
 
@@ -14,27 +14,33 @@ export default function FavoritesPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const loadFavorites = () => {
-      const favorites = getFavoriteProperties()
-      setFavoriteProperties(favorites)
-      setLoading(false)
+    const loadFavorites = async () => {
+      try {
+        // Fetch all properties from API
+        const response = await fetch("/api/properties")
+        if (response.ok) {
+          const allProperties = await response.json()
+          // Filter by favorite IDs
+          const favoriteIds = getFavorites()
+          const favorites = allProperties.filter((p: Property) => favoriteIds.includes(p.id))
+          setFavoriteProperties(favorites)
+        }
+      } catch (error) {
+        console.error("Error loading favorites:", error)
+      } finally {
+        setLoading(false)
+      }
     }
 
     loadFavorites()
-
-    const handleStorageChange = () => {
-      loadFavorites()
-    }
 
     const handleFavoritesChanged = () => {
       loadFavorites()
     }
 
-    window.addEventListener("storage", handleStorageChange)
     window.addEventListener("favorites-changed", handleFavoritesChanged)
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange)
       window.removeEventListener("favorites-changed", handleFavoritesChanged)
     }
   }, [])

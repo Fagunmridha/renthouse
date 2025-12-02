@@ -7,7 +7,7 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
-import { getStoredProperties, getStoredMessages, getCurrentUser } from "@/lib/mock-data"
+import { getStoredMessages, getCurrentUser } from "@/lib/mock-data"
 import type { Property, Message } from "@/lib/types"
 
 export default function DashboardPage() {
@@ -17,10 +17,23 @@ export default function DashboardPage() {
   useEffect(() => {
     const user = getCurrentUser()
     if (user) {
-      const allProperties = getStoredProperties()
-      const userProperties = allProperties.filter((p) => p.ownerId === user.id)
-      setProperties(userProperties)
+      // Fetch properties from API
+      const fetchProperties = async () => {
+        try {
+          const response = await fetch("/api/properties")
+          if (response.ok) {
+            const allProperties = await response.json()
+            const userProperties = allProperties.filter((p: Property) => p.ownerId === user.id)
+            setProperties(userProperties)
+          }
+        } catch (error) {
+          console.error("Error fetching properties:", error)
+        }
+      }
 
+      fetchProperties()
+
+      // Messages still use localStorage for now
       const allMessages = getStoredMessages()
       const userMessages = allMessages.filter((m) => m.ownerId === user.id)
       setMessages(userMessages)

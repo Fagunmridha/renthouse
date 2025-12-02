@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  location    String
+  familyType  String   // SMALL_FAMILY, BIG_FAMILY, BACHELOR
+  price       Int
+  rooms       Int
+  images      String   // JSON array stored as string
+  terms       String
+  ownerId     String
+  ownerName   String
+  ownerEmail  String
+  ownerPhone  String
+  available   Boolean  @default(true)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([ownerId])
+  @@index([location])
+  @@index([familyType])
+  @@index([available])
+}

@@ -7,7 +7,6 @@ import { Footer } from "@/components/footer"
 import { PropertyGrid } from "@/components/property-grid"
 import { PropertyFilters } from "@/components/property-filters"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getStoredProperties } from "@/lib/mock-data"
 import type { Property, FamilyType } from "@/lib/types"
 
 function PropertiesContent() {
@@ -17,8 +16,23 @@ function PropertiesContent() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setProperties(getStoredProperties())
-    setLoading(false)
+    const fetchProperties = async () => {
+      try {
+        const response = await fetch("/api/properties")
+        if (response.ok) {
+          const data = await response.json()
+          setProperties(data)
+        } else {
+          console.error("Failed to fetch properties")
+        }
+      } catch (error) {
+        console.error("Error fetching properties:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProperties()
   }, [])
 
   useEffect(() => {

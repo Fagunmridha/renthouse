@@ -19,7 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useToast } from "@/hooks/use-toast"
-import { getStoredProperties, setStoredProperties, getCurrentUser } from "@/lib/mock-data"
+import { getCurrentUser } from "@/lib/mock-data"
 import type { Property, FamilyType } from "@/lib/types"
 
 const familyTypeLabels: Record<FamilyType, string> = {
@@ -35,33 +35,76 @@ export default function MyPropertiesPage() {
   useEffect(() => {
     const user = getCurrentUser()
     if (user) {
-      const allProperties = getStoredProperties()
-      const userProperties = allProperties.filter((p) => p.ownerId === user.id)
-      setProperties(userProperties)
+      const fetchProperties = async () => {
+        try {
+          const response = await fetch("/api/properties")
+          if (response.ok) {
+            const allProperties = await response.json()
+            const userProperties = allProperties.filter((p: Property) => p.ownerId === user.id)
+            setProperties(userProperties)
+          }
+        } catch (error) {
+          console.error("Error fetching properties:", error)
+        }
+      }
+      fetchProperties()
     }
   }, [])
 
-  const handleDelete = (id: string) => {
-    const allProperties = getStoredProperties()
-    const updatedProperties = allProperties.filter((p) => p.id !== id)
-    setStoredProperties(updatedProperties)
-    setProperties(properties.filter((p) => p.id !== id))
-    toast({
-      title: "Property deleted",
-      description: "Your property has been removed from listings.",
-    })
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await fetch(`/api/properties/${id}`, {
+        method: "DELETE",
+      })
+
+      if (response.ok) {
+        setProperties(properties.filter((p) => p.id !== id))
+        toast({
+          title: "Property deleted",
+          description: "Your property has been removed from listings.",
+        })
+      } else {
+        throw new Error("Failed to delete property")
+      }
+    } catch (error) {
+      console.error("Error deleting property:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete property. Please try again.",
+        variant: "destructive",
+      })
+    }
   }
 
-  const toggleAvailability = (id: string) => {
-    const allProperties = getStoredProperties()
-    const index = allProperties.findIndex((p) => p.id === id)
-    if (index !== -1) {
-      allProperties[index].available = !allProperties[index].available
-      setStoredProperties(allProperties)
-      setProperties(properties.map((p) => (p.id === id ? { ...p, available: !p.available } : p)))
+  const toggleAvailability = async (id: string) => {
+    const property = properties.find((p) => p.id === id)
+    if (!property) return
+
+    try {
+      const updatedProperty = { ...property, available: !property.available }
+      const response = await fetch(`/api/properties/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProperty),
+      })
+
+      if (response.ok) {
+        setProperties(properties.map((p) => (p.id === id ? updatedProperty : p)))
+        toast({
+          title: "Availability updated",
+          description: `Property is now ${updatedProperty.available ? "available" : "unavailable"}.`,
+        })
+      } else {
+        throw new Error("Failed to update property")
+      }
+    } catch (error) {
+      console.error("Error updating property:", error)
       toast({
-        title: "Availability updated",
-        description: `Property is now ${allProperties[index].available ? "available" : "unavailable"}.`,
+        title: "Error",
+        description: "Failed to update property. Please try again.",
+        variant: "destructive",
       })
     }
   }
