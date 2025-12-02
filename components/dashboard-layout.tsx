@@ -100,12 +100,12 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex">
-      {/* Desktop Sidebar */}
+     
       <aside className="hidden md:flex w-64 border-r bg-card flex-col">
         <SidebarContent />
       </aside>
 
-      {/* Mobile Header */}
+     
       <div className="flex-1 flex flex-col">
         <header className="md:hidden flex items-center justify-between p-4 border-b bg-card">
           <Link href="/" className="flex items-center gap-2">

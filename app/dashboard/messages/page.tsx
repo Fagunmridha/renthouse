@@ -29,7 +29,7 @@ export default function MessagesPage() {
         property: properties.find((p) => p.id === msg.propertyId),
       }))
 
-      // Sort by date, newest first
+     
       messagesWithProperty.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
       setMessages(messagesWithProperty)

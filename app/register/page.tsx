@@ -32,7 +32,7 @@ export default function RegisterPage() {
     e.preventDefault()
     setLoading(true)
 
-    // Simulate API call
+   
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     const users = getStoredUsers()

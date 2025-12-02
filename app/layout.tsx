@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "RentHouse - Find Your Perfect Home",
   description: "Browse and rent houses, apartments, and rooms. Connect directly with property owners.",
-  generator: "v0.app",
+  generator: "Fagun",
   icons: {
     icon: [
       {

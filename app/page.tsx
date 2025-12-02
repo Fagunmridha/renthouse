@@ -56,9 +56,9 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1">
-        {/* Hero Section */}
+       
         <section className="relative py-16 md:py-28 lg:py-32 overflow-hidden min-h-[600px] md:min-h-[700px] flex items-center">
-          {/* Background Image */}
+         
           <div className="absolute inset-0 z-0">
             <Image
               src="/modern-apartment-living-room.png"
@@ -68,46 +68,46 @@ export default function HomePage() {
               className="object-cover "
               quality={90}
             />
-            {/* Overlay gradients */}
+           
             <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/60 to-background/70 dark:from-background/75 dark:via-background/70 dark:to-background/75" />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/20 to-background" />
           </div>
 
-          {/* Animated floating elements */}
+        
           <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl float-slow" />
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl float-medium" />
             <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl float-fast" />
           </div>
 
-          {/* Content */}
+      
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-12 max-w-4xl mx-auto">
-              {/* Badge with fade-in animation */}
+             
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 hero-fade-in-delay-1">
                 <TrendingUp className="h-4 w-4 animate-bounce [animation-duration:2s]" />
                 <span>Trusted by thousands of renters</span>
               </div>
 
-              {/* Heading with fade-in and slide-up animation */}
+             
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent hero-fade-in-delay-3">
                 Find Your Perfect Home
               </h1>
 
-              {/* Description with fade-in animation */}
+             
               <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed mb-8 hero-fade-in-delay-5">
                 Discover thousands of verified rental properties. From cozy studios to spacious family homes, 
                 find the perfect place that fits your lifestyle and budget.
               </p>
             </div>
 
-            {/* Search component with fade-in animation */}
+          
             <div className="hero-fade-in-delay-7">
               <HeroSearch />
             </div>
           </div>
 
-          {/* Scroll indicator */}
+       
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
             <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex items-start justify-center p-2">
               <div className="w-1 h-3 bg-foreground/50 rounded-full animate-pulse" />
@@ -115,7 +115,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Stats Section */}
+      
         <section className="py-12 md:py-16 border-y bg-card/50">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -141,7 +141,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Features Section */}
+        
         <section className="py-20 md:py-28">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -170,7 +170,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Featured Properties */}
+       
         <section className="py-20 md:py-28 bg-gradient-to-b from-secondary/20 via-background to-background">
           <div className="container mx-auto px-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">
@@ -193,11 +193,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA Section */}
+       
         <section className="py-20 md:py-28">
           <div className="container mx-auto px-4">
             <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground rounded-3xl p-8 md:p-16 text-center shadow-2xl">
-              {/* Decorative elements */}
+             
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
               
@@ -232,7 +232,7 @@ export default function HomePage() {
                   </Button>
                 </div>
                 
-                {/* Trust indicators */}
+               
                 <div className="mt-12 pt-8 border-t border-primary-foreground/20 flex flex-wrap items-center justify-center gap-6 text-sm opacity-90">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-5 w-5" />

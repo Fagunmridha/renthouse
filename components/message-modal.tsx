@@ -38,7 +38,7 @@ export function MessageModal({ property }: MessageModalProps) {
     e.preventDefault()
     setLoading(true)
 
-    // Simulate API call
+  
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     const newMessage: Message = {

@@ -29,7 +29,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
     }
     checkFavorite()
     
-    // Listen for storage changes
+   
     window.addEventListener("storage", checkFavorite)
     return () => window.removeEventListener("storage", checkFavorite)
   }, [property.id])
@@ -44,7 +44,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
       addToFavorites(property.id)
       setFavorited(true)
     }
-    // Dispatch custom event to notify other components
+   
     window.dispatchEvent(new CustomEvent("favorites-changed"))
   }
 

@@ -22,7 +22,6 @@ export default function FavoritesPage() {
 
     loadFavorites()
 
-    // Listen for storage changes and custom events to update favorites in real-time
     const handleStorageChange = () => {
       loadFavorites()
     }
