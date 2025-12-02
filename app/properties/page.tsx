@@ -61,19 +61,19 @@ function PropertiesContent() {
           </div>
 
           <div className="flex flex-col md:flex-row gap-8">
-            {/* Mobile Filters */}
+         
             <div className="md:hidden">
               <PropertyFilters compact />
             </div>
 
-            {/* Desktop Filters */}
+         
             <aside className="hidden md:block w-72 shrink-0">
               <div className="sticky top-24">
                 <PropertyFilters />
               </div>
             </aside>
 
-            {/* Properties Grid */}
+          
             <div className="flex-1">
               {loading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

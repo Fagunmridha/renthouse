@@ -40,9 +40,21 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Property Types</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">Small Family Homes</li>
-              <li className="text-sm text-muted-foreground">Big Family Homes</li>
-              <li className="text-sm text-muted-foreground">Bachelor Apartments</li>
+              <li>
+                <Link href="/properties?familyType=SMALL_FAMILY" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Small Family Homes
+                </Link>
+              </li>
+              <li>
+                <Link href="/properties?familyType=BIG_FAMILY" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Big Family Homes
+                </Link>
+              </li>
+              <li>
+                <Link href="/properties?familyType=BACHELOR" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  Bachelor Apartments
+                </Link>
+              </li>
             </ul>
           </div>
 
