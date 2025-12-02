@@ -180,7 +180,7 @@ export function Footer() {
               © {new Date().getFullYear()} RentHouse. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link href="#" className="hover:text-accent transition-colors duration-300">
+              <Link href="/privacy" className="hover:text-accent transition-colors duration-300">
                 Privacy Policy
               </Link>
               <Link href="#" className="hover:text-accent transition-colors duration-300">
