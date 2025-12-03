@@ -15,6 +15,15 @@ export const locations = [
 
 export const mockUsers: User[] = [
   {
+    id: "user-admin",
+    name: "Admin",
+    email: "fagunandy@gmail.com",
+    password: "admin123",
+    role: "ADMIN",
+    phone: "+880 1234-567890",
+    createdAt: new Date("2024-01-01"),
+  },
+  {
     id: "user-1",
     name: "John Smith",
     email: "john@example.com",
@@ -236,7 +245,24 @@ export function setStoredProperties(properties: Property[]) {
 export function getStoredUsers(): User[] {
   if (typeof window === "undefined") return mockUsers
   const stored = localStorage.getItem("rent-house-users")
-  return stored ? JSON.parse(stored) : mockUsers
+  const users = stored ? JSON.parse(stored) : mockUsers
+  
+  // Always ensure admin user exists
+  const adminUser = mockUsers.find(u => u.email === "fagunandy@gmail.com")
+  if (adminUser) {
+    const adminExists = users.find((u: User) => u.email === "fagunandy@gmail.com")
+    if (!adminExists) {
+      users.unshift(adminUser) // Add admin at the beginning
+    } else {
+      // Update admin user if exists
+      const adminIndex = users.findIndex((u: User) => u.email === "fagunandy@gmail.com")
+      if (adminIndex !== -1) {
+        users[adminIndex] = adminUser
+      }
+    }
+  }
+  
+  return users
 }
 
 export function setStoredUsers(users: User[]) {

@@ -31,6 +31,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       ownerPhone: dbProperty.ownerPhone,
       available: dbProperty.available,
       featured: dbProperty.featured,
+      approved: dbProperty.approved ?? false,
       createdAt: dbProperty.createdAt,
     }
 
@@ -80,6 +81,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       ownerPhone: updatedProperty.ownerPhone,
       available: updatedProperty.available,
       featured: updatedProperty.featured,
+      approved: updatedProperty.approved ?? false,
       createdAt: updatedProperty.createdAt,
     }
 

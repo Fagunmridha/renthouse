@@ -20,10 +20,13 @@ export default function DashboardPage() {
       // Fetch properties from API
       const fetchProperties = async () => {
         try {
-          const response = await fetch("/api/properties")
+          // Admin can see all properties, owner sees only their own
+          const response = await fetch(user.role === "ADMIN" ? "/api/properties?admin=true" : "/api/properties")
           if (response.ok) {
             const allProperties = await response.json()
-            const userProperties = allProperties.filter((p: Property) => p.ownerId === user.id)
+            const userProperties = user.role === "ADMIN" 
+              ? allProperties // Admin sees all
+              : allProperties.filter((p: Property) => p.ownerId === user.id) // Owner sees only their own
             setProperties(userProperties)
           }
         } catch (error) {

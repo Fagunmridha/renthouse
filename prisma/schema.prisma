@@ -26,10 +26,12 @@ model Property {
   ownerPhone  String
   available   Boolean  @default(true)
   featured    Boolean  @default(false)
+  approved    Boolean  @default(false) // Admin approval required
   createdAt   DateTime @default(now())
 
   @@index([ownerId])
   @@index([location])
   @@index([familyType])
   @@index([available])
+  @@index([approved])
 }

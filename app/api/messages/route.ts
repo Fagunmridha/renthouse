@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { mockMessages } from "@/lib/mock-data"
 
-// GET all messages
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const ownerId = searchParams.get("ownerId")
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(messages)
 }
 
-// POST new message
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()

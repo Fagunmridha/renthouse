@@ -1,4 +1,4 @@
-export type UserRole = "RENTER" | "OWNER"
+export type UserRole = "ADMIN" | "RENTER" | "OWNER"
 
 export type FamilyType = "SMALL_FAMILY" | "BIG_FAMILY" | "BACHELOR"
 
@@ -28,6 +28,7 @@ export interface Property {
   ownerPhone: string
   available: boolean
   featured: boolean
+  approved: boolean
   createdAt: Date
 }
 

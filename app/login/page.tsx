@@ -39,7 +39,9 @@ export default function LoginPage() {
         title: "Welcome back!",
         description: `You've successfully logged in as ${user.name}.`,
       })
-      if (user.role === "OWNER") {
+      if (user.role === "ADMIN") {
+        router.push("/admin")
+      } else if (user.role === "OWNER") {
         router.push("/dashboard")
       } else {
         router.push("/properties")
@@ -47,7 +49,7 @@ export default function LoginPage() {
     } else {
       toast({
         title: "Login failed",
-        description: "Invalid email or password. Try: john@example.com / password123",
+        description: "Invalid email or password. Try: fagunandy@gmail.com / admin123 (Admin) or john@example.com / password123 (Owner)",
         variant: "destructive",
       })
     }
@@ -103,6 +105,7 @@ export default function LoginPage() {
             </div>
             <div className="text-sm text-muted-foreground bg-muted p-3 rounded-lg">
               <p className="font-medium mb-1">Demo credentials:</p>
+              <p>Admin: fagunandy@gmail.com / admin123</p>
               <p>Owner: john@example.com / password123</p>
               <p>Renter: mike@example.com / password123</p>
             </div>

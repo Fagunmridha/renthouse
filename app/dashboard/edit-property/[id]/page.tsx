@@ -17,10 +17,16 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
 
   useEffect(() => {
     const user = getCurrentUser()
+    if (!user || (user.role !== "OWNER" && user.role !== "ADMIN")) {
+      router.push("/dashboard/my-properties")
+      return
+    }
+    
     const properties = getStoredProperties()
     const found = properties.find((p) => p.id === id)
 
-    if (!found || !user || found.ownerId !== user.id) {
+    // Admin can edit any property, owner can only edit their own
+    if (!found || (user.role !== "ADMIN" && found.ownerId !== user.id)) {
       router.push("/dashboard/my-properties")
       return
     }

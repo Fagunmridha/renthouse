@@ -95,7 +95,24 @@ export function Navbar() {
                   </div>
                 </div>
                 <DropdownMenuSeparator />
-                {user.role === "OWNER" && (
+                {user.role === "ADMIN" && (
+                  <>
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin" className="cursor-pointer">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Admin Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin/properties" className="cursor-pointer">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Approve Properties
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
+                {(user.role === "OWNER" || user.role === "ADMIN") && (
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard" className="cursor-pointer">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -163,9 +180,19 @@ export function Navbar() {
                     </Link>
                   </>
                 )}
-                {user?.role === "OWNER" && (
+                {user?.role === "ADMIN" && (
+                  <>
+                    <Link href="/admin" onClick={() => setOpen(false)} className="text-lg font-medium">
+                      Admin Dashboard
+                    </Link>
+                    <Link href="/admin/properties" onClick={() => setOpen(false)} className="text-lg font-medium">
+                      Approve Properties
+                    </Link>
+                  </>
+                )}
+                {(user?.role === "OWNER" || user?.role === "ADMIN") && (
                   <Link href="/dashboard" onClick={() => setOpen(false)} className="text-lg font-medium">
-                    Dashboard
+                    Owner Dashboard
                   </Link>
                 )}
               </div>

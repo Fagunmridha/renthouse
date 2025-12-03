@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, email, password, phone, role } = body
 
-    // Check if user already exists
+   
     const existingUser = mockUsers.find((u) => u.email === email)
     if (existingUser) {
       return NextResponse.json({ error: "User with this email already exists" }, { status: 400 })

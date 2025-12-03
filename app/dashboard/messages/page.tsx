@@ -33,7 +33,10 @@ export default function MessagesPage() {
     const user = getCurrentUser()
     if (user) {
       const allMessages = getStoredMessages()
-      const userMessages = allMessages.filter((m) => m.ownerId === user.id)
+      // Admin can see all messages, owner sees only their own
+      const userMessages = user.role === "ADMIN" 
+        ? allMessages 
+        : allMessages.filter((m) => m.ownerId === user.id)
       const properties = getStoredProperties()
 
       const messagesWithProperty = userMessages.map((msg) => ({

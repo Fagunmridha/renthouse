@@ -116,7 +116,8 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
           })
           router.push("/dashboard/my-properties")
         } else {
-          throw new Error("Failed to update property")
+          const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
+          throw new Error(errorData.error || "Failed to update property")
         }
       } else {
         // Create new property
@@ -148,20 +149,23 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
         })
 
         if (response.ok) {
+          const data = await response.json()
           toast({
             title: "Property added!",
-            description: "Your property has been added successfully.",
+            description: "Your property has been added successfully. It will be visible after admin approval.",
           })
           router.push("/dashboard/my-properties")
         } else {
-          throw new Error("Failed to add property")
+          const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
+          throw new Error(errorData.error || "Failed to add property")
         }
       }
     } catch (error) {
       console.error("Error saving property:", error)
+      const errorMessage = error instanceof Error ? error.message : "Failed to save property. Please try again."
       toast({
         title: "Error",
-        description: "Failed to save property. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {
