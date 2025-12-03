@@ -257,7 +257,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" variant="secondary" className="bg-background text-foreground hover:bg-background/90 shadow-lg" asChild>
-                    <Link href="/register">
+                    <Link href="/dashboard">
                       <Home className="h-5 w-5 mr-2" />
                       List Your Property
                     </Link>

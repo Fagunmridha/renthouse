@@ -40,7 +40,7 @@ export default function LoginPage() {
         description: `You've successfully logged in as ${user.name}.`,
       })
       if (user.role === "ADMIN") {
-        router.push("/admin")
+        router.push("/#")
       } else if (user.role === "OWNER") {
         router.push("/dashboard")
       } else {
