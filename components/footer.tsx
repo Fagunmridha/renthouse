@@ -4,12 +4,11 @@ import { Home, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Hear
 export function Footer() {
   return (
     <footer className="relative border-t bg-gradient-to-b from-secondary/50 via-card to-secondary/30">
-      {/* Decorative gradient overlay matching project colors */}
+    
       <div className="absolute inset-0 bg-gradient-to-r from-accent/8 via-transparent to-accent/5 pointer-events-none" />
       
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="p-2 rounded-xl bg-gradient-to-br from-accent to-accent/80 group-hover:from-accent/90 group-hover:to-accent transition-all duration-300 shadow-md shadow-accent/20 group-hover:shadow-lg group-hover:shadow-accent/30 group-hover:scale-110">
@@ -22,10 +21,10 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Find your perfect home with RentHouse. Browse thousands of verified properties and connect directly with trusted owners.
             </p>
-            {/* Social Media Links */}
+            
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/fa.gun.344509"
                 className="p-2 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-all duration-300 hover:scale-110 shadow-sm"
                 aria-label="Facebook"
               >
@@ -46,7 +45,7 @@ export function Footer() {
                 <Instagram className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/fagun-mridha/"
                 className="p-2 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-all duration-300 hover:scale-110 shadow-sm"
                 aria-label="LinkedIn"
               >
@@ -55,7 +54,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+         
           <div>
             <h3 className="font-bold text-lg mb-6 text-foreground">Quick Links</h3>
             <ul className="space-y-3">
@@ -94,7 +93,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Property Types */}
+       
           <div>
             <h3 className="font-bold text-lg mb-6 text-foreground">Property Types</h3>
             <ul className="space-y-3">
@@ -125,7 +124,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+        
           <div>
             <h3 className="font-bold text-lg mb-6 text-foreground">Contact Us</h3>
             <ul className="space-y-4">
@@ -173,7 +172,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+      
         <div className="border-t border-border/60 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground text-center md:text-left">
