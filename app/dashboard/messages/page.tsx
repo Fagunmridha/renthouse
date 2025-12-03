@@ -1,13 +1,25 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
-import { MessageSquare, Phone, Calendar, ExternalLink } from "lucide-react"
+import { MessageSquare, Phone, Calendar, ExternalLink, Trash2 } from "lucide-react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { getStoredMessages, getStoredProperties, getCurrentUser } from "@/lib/mock-data"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useToast } from "@/hooks/use-toast"
+import { getStoredMessages, setStoredMessages, getStoredProperties, getCurrentUser } from "@/lib/mock-data"
 import type { Message, Property } from "@/lib/types"
 
 interface MessageWithProperty extends Message {
@@ -15,9 +27,9 @@ interface MessageWithProperty extends Message {
 }
 
 export default function MessagesPage() {
-  const [messages, setMessages] = useState<MessageWithProperty[]>([])
+  const { toast } = useToast()
 
-  useEffect(() => {
+  const loadMessages = (): MessageWithProperty[] => {
     const user = getCurrentUser()
     if (user) {
       const allMessages = getStoredMessages()
@@ -29,12 +41,27 @@ export default function MessagesPage() {
         property: properties.find((p) => p.id === msg.propertyId),
       }))
 
-     
       messagesWithProperty.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
-      setMessages(messagesWithProperty)
+      return messagesWithProperty
     }
-  }, [])
+    return []
+  }
+
+  const [messages, setMessages] = useState<MessageWithProperty[]>(() => loadMessages())
+
+  const handleDelete = (messageId: string) => {
+    const allMessages = getStoredMessages()
+    const updatedMessages = allMessages.filter((m) => m.id !== messageId)
+    setStoredMessages(updatedMessages)
+    
+    setMessages(messages.filter((m) => m.id !== messageId))
+    
+    toast({
+      title: "Message deleted",
+      description: "The message has been removed successfully.",
+    })
+  }
 
   return (
     <DashboardLayout>
@@ -78,14 +105,41 @@ export default function MessagesPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">{message.message}</p>
-                  {message.property && (
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href={`/property/${message.property.id}`}>
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        View Property
-                      </Link>
-                    </Button>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {message.property && (
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={`/property/${message.property.id}`}>
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          View Property
+                        </Link>
+                      </Button>
+                    )}
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="destructive" size="sm">
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Delete
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete Message</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to delete this message from {message.senderName}? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => handleDelete(message.id)}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
                 </CardContent>
               </Card>
             ))}
