@@ -18,9 +18,38 @@ function PropertiesContent() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch("/api/properties")
+        // Build query string from search params
+        const params = new URLSearchParams()
+        const location = searchParams.get("location")
+        const familyType = searchParams.get("familyType")
+        const minPrice = searchParams.get("minPrice")
+        const maxPrice = searchParams.get("maxPrice")
+        const rooms = searchParams.get("rooms")
+
+        if (location) params.set("location", location)
+        if (familyType) params.set("familyType", familyType)
+        if (minPrice) params.set("minPrice", minPrice)
+        if (maxPrice) params.set("maxPrice", maxPrice)
+        if (rooms) params.set("rooms", rooms)
+
+        const queryString = params.toString()
+        const url = queryString ? `/api/properties?${queryString}` : "/api/properties"
+
+        const response = await fetch(url)
         if (response.ok) {
           const data = await response.json()
+          console.log("Properties API Response:", {
+            url,
+            count: data.length,
+            properties: data.map((p: Property) => ({
+              id: p.id,
+              title: p.title,
+              location: p.location,
+              familyType: p.familyType,
+              approved: p.approved,
+              available: p.available,
+            })),
+          })
           setProperties(data)
         } else {
           console.error("Failed to fetch properties")
@@ -33,35 +62,13 @@ function PropertiesContent() {
     }
 
     fetchProperties()
-  }, [])
+  }, [searchParams])
 
   useEffect(() => {
-    let result = properties.filter((p) => p.available)
-
-    const location = searchParams.get("location")
-    const familyType = searchParams.get("familyType") as FamilyType | null
-    const minPrice = searchParams.get("minPrice")
-    const maxPrice = searchParams.get("maxPrice")
-    const rooms = searchParams.get("rooms")
-
-    if (location) {
-      result = result.filter((p) => p.location === location)
-    }
-    if (familyType) {
-      result = result.filter((p) => p.familyType === familyType)
-    }
-    if (minPrice) {
-      result = result.filter((p) => p.price >= Number(minPrice))
-    }
-    if (maxPrice) {
-      result = result.filter((p) => p.price <= Number(maxPrice))
-    }
-    if (rooms) {
-      result = result.filter((p) => p.rooms === Number(rooms))
-    }
-
+    // Since API already filters, just filter by available status
+    const result = properties.filter((p) => p.available)
     setFilteredProperties(result)
-  }, [properties, searchParams])
+  }, [properties])
 
   return (
     <div className="min-h-screen flex flex-col">

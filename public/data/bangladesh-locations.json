@@ -1,0 +1,894 @@
+{
+  "divisions": [
+    {
+      "name": "Dhaka",
+      "districts": [
+        {
+          "name": "Dhaka",
+          "upazilas": [
+            {"name": "Dhanmondi", "lat": 23.7465, "lng": 90.3760},
+            {"name": "Gulshan", "lat": 23.7925, "lng": 90.4078},
+            {"name": "Uttara", "lat": 23.8759, "lng": 90.3795},
+            {"name": "Banani", "lat": 23.7940, "lng": 90.4060},
+            {"name": "Wari", "lat": 23.7104, "lng": 90.4074},
+            {"name": "Motijheel", "lat": 23.7272, "lng": 90.4203},
+            {"name": "Old Dhaka", "lat": 23.7104, "lng": 90.4074},
+            {"name": "Tejgaon", "lat": 23.7620, "lng": 90.4070},
+            {"name": "Ramna", "lat": 23.7300, "lng": 90.4000},
+            {"name": "Lalbagh", "lat": 23.7200, "lng": 90.3900},
+            {"name": "Kotwali", "lat": 23.7100, "lng": 90.4100},
+            {"name": "Sutrapur", "lat": 23.7150, "lng": 90.4150},
+            {"name": "Sabujbagh", "lat": 23.7500, "lng": 90.4300},
+            {"name": "Demra", "lat": 23.7500, "lng": 90.4500},
+            {"name": "Shyampur", "lat": 23.7200, "lng": 90.4200},
+            {"name": "Badda", "lat": 23.7800, "lng": 90.4200},
+            {"name": "Tejgaon Industrial Area", "lat": 23.7700, "lng": 90.4000},
+            {"name": "Mohammadpur", "lat": 23.7600, "lng": 90.3600},
+            {"name": "Kafrul", "lat": 23.8000, "lng": 90.3800},
+            {"name": "Mirpur", "lat": 23.8000, "lng": 90.3600},
+            {"name": "Pallabi", "lat": 23.8200, "lng": 90.3600},
+            {"name": "Shah Ali", "lat": 23.8100, "lng": 90.3500},
+            {"name": "Cantonment", "lat": 23.8300, "lng": 90.4000},
+            {"name": "Dhanmondi", "lat": 23.7465, "lng": 90.3760},
+            {"name": "Lalmatia", "lat": 23.7500, "lng": 90.3700},
+            {"name": "Mohakhali", "lat": 23.7800, "lng": 90.4000},
+            {"name": "Banani", "lat": 23.7940, "lng": 90.4060},
+            {"name": "Gulshan-1", "lat": 23.7925, "lng": 90.4078},
+            {"name": "Gulshan-2", "lat": 23.7950, "lng": 90.4100},
+            {"name": "Baridhara", "lat": 23.8000, "lng": 90.4150},
+            {"name": "Nikunja", "lat": 23.8300, "lng": 90.4200},
+            {"name": "Khilkhet", "lat": 23.8200, "lng": 90.4300},
+            {"name": "Uttara Sector 1-18", "lat": 23.8759, "lng": 90.3795},
+            {"name": "Dakshinkhan", "lat": 23.8500, "lng": 90.4000},
+            {"name": "Uttarkhan", "lat": 23.8600, "lng": 90.4100},
+            {"name": "Biman Bandar", "lat": 23.8400, "lng": 90.4000},
+            {"name": "Dhamrai", "lat": 23.9000, "lng": 90.2000},
+            {"name": "Dohar", "lat": 23.6000, "lng": 90.1500},
+            {"name": "Keraniganj", "lat": 23.6500, "lng": 90.3000},
+            {"name": "Nawabganj", "lat": 23.7000, "lng": 90.2500},
+            {"name": "Savar", "lat": 23.8500, "lng": 90.2500}
+          ]
+        },
+        {
+          "name": "Gazipur",
+          "upazilas": [
+            {"name": "Gazipur Sadar", "lat": 24.0029, "lng": 90.4284},
+            {"name": "Kaliakair", "lat": 24.0625, "lng": 90.3500},
+            {"name": "Kapasia", "lat": 24.1000, "lng": 90.5500},
+            {"name": "Sreepur", "lat": 24.1500, "lng": 90.5000},
+            {"name": "Kaliganj", "lat": 24.0500, "lng": 90.4000}
+          ]
+        },
+        {
+          "name": "Narayanganj",
+          "upazilas": [
+            {"name": "Narayanganj Sadar", "lat": 23.6225, "lng": 90.4997},
+            {"name": "Bandar", "lat": 23.6000, "lng": 90.5000},
+            {"name": "Rupganj", "lat": 23.7000, "lng": 90.5500},
+            {"name": "Sonargaon", "lat": 23.6500, "lng": 90.6000},
+            {"name": "Araihazar", "lat": 23.8000, "lng": 90.6500}
+          ]
+        },
+        {
+          "name": "Narsingdi",
+          "upazilas": [
+            {"name": "Narsingdi Sadar", "lat": 23.9167, "lng": 90.7167},
+            {"name": "Belabo", "lat": 24.0000, "lng": 90.8000},
+            {"name": "Monohardi", "lat": 23.9500, "lng": 90.7500},
+            {"name": "Palash", "lat": 23.9000, "lng": 90.7000},
+            {"name": "Raipura", "lat": 23.8500, "lng": 90.6500},
+            {"name": "Shibpur", "lat": 23.8800, "lng": 90.6800}
+          ]
+        },
+        {
+          "name": "Tangail",
+          "upazilas": [
+            {"name": "Tangail Sadar", "lat": 24.2500, "lng": 89.9167},
+            {"name": "Basail", "lat": 24.3000, "lng": 90.0000},
+            {"name": "Bhuapur", "lat": 24.2000, "lng": 89.8500},
+            {"name": "Delduar", "lat": 24.1500, "lng": 89.9500},
+            {"name": "Dhanbari", "lat": 24.3500, "lng": 89.8000},
+            {"name": "Ghatail", "lat": 24.4000, "lng": 89.9000},
+            {"name": "Gopalpur", "lat": 24.1000, "lng": 89.9000},
+            {"name": "Kalihati", "lat": 24.3000, "lng": 89.8500},
+            {"name": "Madhupur", "lat": 24.5000, "lng": 90.0000},
+            {"name": "Mirzapur", "lat": 24.2000, "lng": 90.0000},
+            {"name": "Nagarpur", "lat": 24.4500, "lng": 89.7500},
+            {"name": "Sakhipur", "lat": 24.1500, "lng": 89.8000}
+          ]
+        },
+        {
+          "name": "Kishoreganj",
+          "upazilas": [
+            {"name": "Kishoreganj Sadar", "lat": 24.4333, "lng": 90.7833},
+            {"name": "Austagram", "lat": 24.5000, "lng": 90.9000},
+            {"name": "Bajitpur", "lat": 24.4000, "lng": 90.8500},
+            {"name": "Bhairab", "lat": 24.0500, "lng": 90.9667},
+            {"name": "Hossainpur", "lat": 24.3500, "lng": 90.8000},
+            {"name": "Itna", "lat": 24.5500, "lng": 91.0000},
+            {"name": "Karimganj", "lat": 24.3000, "lng": 90.7500},
+            {"name": "Katiadi", "lat": 24.2500, "lng": 90.7000},
+            {"name": "Kuliarchar", "lat": 24.2000, "lng": 90.6500},
+            {"name": "Mithamain", "lat": 24.6000, "lng": 91.0500},
+            {"name": "Nikli", "lat": 24.4500, "lng": 90.9500},
+            {"name": "Pakundia", "lat": 24.1500, "lng": 90.6000},
+            {"name": "Tarail", "lat": 24.5000, "lng": 90.8500}
+          ]
+        },
+        {
+          "name": "Manikganj",
+          "upazilas": [
+            {"name": "Manikganj Sadar", "lat": 23.8667, "lng": 90.0000},
+            {"name": "Daulatpur", "lat": 23.8000, "lng": 89.9500},
+            {"name": "Ghior", "lat": 23.9000, "lng": 90.0500},
+            {"name": "Harirampur", "lat": 23.8500, "lng": 89.9000},
+            {"name": "Saturia", "lat": 23.9500, "lng": 90.1000},
+            {"name": "Shibalaya", "lat": 23.8000, "lng": 90.1000},
+            {"name": "Singair", "lat": 23.7500, "lng": 90.0500}
+          ]
+        },
+        {
+          "name": "Munshiganj",
+          "upazilas": [
+            {"name": "Munshiganj Sadar", "lat": 23.5500, "lng": 90.5333},
+            {"name": "Gazaria", "lat": 23.6000, "lng": 90.6000},
+            {"name": "Lohajang", "lat": 23.5000, "lng": 90.5000},
+            {"name": "Sirajdikhan", "lat": 23.4500, "lng": 90.4500},
+            {"name": "Sreenagar", "lat": 23.5500, "lng": 90.4000},
+            {"name": "Tongibari", "lat": 23.5000, "lng": 90.5500}
+          ]
+        },
+        {
+          "name": "Rajbari",
+          "upazilas": [
+            {"name": "Rajbari Sadar", "lat": 23.7500, "lng": 89.6500},
+            {"name": "Baliakandi", "lat": 23.7000, "lng": 89.7000},
+            {"name": "Goalandaghat", "lat": 23.8000, "lng": 89.6000},
+            {"name": "Pangsha", "lat": 23.6500, "lng": 89.6000},
+            {"name": "Kalukhali", "lat": 23.7000, "lng": 89.5500}
+          ]
+        },
+        {
+          "name": "Shariatpur",
+          "upazilas": [
+            {"name": "Shariatpur Sadar", "lat": 23.2000, "lng": 90.3667},
+            {"name": "Bhedarganj", "lat": 23.2500, "lng": 90.4000},
+            {"name": "Damudya", "lat": 23.1500, "lng": 90.3000},
+            {"name": "Gosairhat", "lat": 23.1000, "lng": 90.2500},
+            {"name": "Naria", "lat": 23.3000, "lng": 90.4500},
+            {"name": "Zajira", "lat": 23.2000, "lng": 90.3500}
+          ]
+        },
+        {
+          "name": "Faridpur",
+          "upazilas": [
+            {"name": "Faridpur Sadar", "lat": 23.6000, "lng": 89.8333},
+            {"name": "Alfadanga", "lat": 23.5500, "lng": 89.9000},
+            {"name": "Bhanga", "lat": 23.6500, "lng": 89.8000},
+            {"name": "Boalmari", "lat": 23.5000, "lng": 89.7500},
+            {"name": "Charbhadrasan", "lat": 23.4500, "lng": 89.7000},
+            {"name": "Madhukhali", "lat": 23.7000, "lng": 89.8500},
+            {"name": "Nagarkanda", "lat": 23.5500, "lng": 89.7000},
+            {"name": "Sadarpur", "lat": 23.6000, "lng": 89.9000},
+            {"name": "Saltha", "lat": 23.5000, "lng": 89.6500}
+          ]
+        },
+        {
+          "name": "Gopalganj",
+          "upazilas": [
+            {"name": "Gopalganj Sadar", "lat": 23.0167, "lng": 89.8167},
+            {"name": "Kashiani", "lat": 23.0500, "lng": 89.9000},
+            {"name": "Kotalipara", "lat": 22.9500, "lng": 89.7500},
+            {"name": "Muksudpur", "lat": 23.0000, "lng": 89.8500},
+            {"name": "Tungipara", "lat": 22.9000, "lng": 89.8000}
+          ]
+        },
+        {
+          "name": "Madaripur",
+          "upazilas": [
+            {"name": "Madaripur Sadar", "lat": 23.1667, "lng": 90.2000},
+            {"name": "Kalkini", "lat": 23.1000, "lng": 90.2500},
+            {"name": "Rajoir", "lat": 23.2000, "lng": 90.1500},
+            {"name": "Shibchar", "lat": 23.1500, "lng": 90.1000}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chittagong",
+      "districts": [
+        {
+          "name": "Chittagong",
+          "upazilas": [
+            {"name": "Chittagong Sadar", "lat": 22.3569, "lng": 91.7832},
+            {"name": "Hathazari", "lat": 22.5000, "lng": 91.8000},
+            {"name": "Raozan", "lat": 22.5500, "lng": 91.9000},
+            {"name": "Fatikchhari", "lat": 22.7000, "lng": 91.8000},
+            {"name": "Sandwip", "lat": 22.5000, "lng": 91.5000},
+            {"name": "Sitakunda", "lat": 22.6000, "lng": 91.7000},
+            {"name": "Mirsharai", "lat": 22.8000, "lng": 91.6000},
+            {"name": "Patiya", "lat": 22.3000, "lng": 91.9000},
+            {"name": "Banshkhali", "lat": 22.2000, "lng": 91.8500},
+            {"name": "Boalkhali", "lat": 22.2500, "lng": 91.9500},
+            {"name": "Anwara", "lat": 22.1500, "lng": 91.9000},
+            {"name": "Chandanaish", "lat": 22.1000, "lng": 91.8000},
+            {"name": "Satkania", "lat": 22.0500, "lng": 91.7500},
+            {"name": "Lohagara", "lat": 22.0000, "lng": 91.7000},
+            {"name": "Bashkhali", "lat": 22.2000, "lng": 91.8500}
+          ]
+        },
+        {
+          "name": "Cox's Bazar",
+          "upazilas": [
+            {"name": "Cox's Bazar Sadar", "lat": 21.4272, "lng": 91.9708},
+            {"name": "Teknaf", "lat": 20.8667, "lng": 92.3000},
+            {"name": "Ukhiya", "lat": 21.2000, "lng": 92.1000},
+            {"name": "Ramu", "lat": 21.5000, "lng": 92.0000},
+            {"name": "Moheshkhali", "lat": 21.6000, "lng": 91.9000},
+            {"name": "Kutubdia", "lat": 21.8000, "lng": 91.8500},
+            {"name": "Chakaria", "lat": 21.7000, "lng": 92.0500},
+            {"name": "Pekua", "lat": 21.5500, "lng": 91.9500}
+          ]
+        },
+        {
+          "name": "Rangamati",
+          "upazilas": [
+            {"name": "Rangamati Sadar", "lat": 22.6333, "lng": 92.2000},
+            {"name": "Kaptai", "lat": 22.5000, "lng": 92.3000},
+            {"name": "Kawkhali", "lat": 22.7000, "lng": 92.1000},
+            {"name": "Baghaichhari", "lat": 22.8000, "lng": 92.2000},
+            {"name": "Barkal", "lat": 22.9000, "lng": 92.3000},
+            {"name": "Langadu", "lat": 23.0000, "lng": 92.4000},
+            {"name": "Rajasthali", "lat": 22.7500, "lng": 92.1500},
+            {"name": "Belaichhari", "lat": 22.8500, "lng": 92.2500},
+            {"name": "Juraichhari", "lat": 22.9500, "lng": 92.3500},
+            {"name": "Naniarchar", "lat": 23.0500, "lng": 92.4500}
+          ]
+        },
+        {
+          "name": "Bandarban",
+          "upazilas": [
+            {"name": "Bandarban Sadar", "lat": 22.1950, "lng": 92.2194},
+            {"name": "Alikadam", "lat": 22.1000, "lng": 92.3000},
+            {"name": "Naikhongchhari", "lat": 22.0500, "lng": 92.2500},
+            {"name": "Rowangchhari", "lat": 22.1500, "lng": 92.2000},
+            {"name": "Ruma", "lat": 22.2000, "lng": 92.3500},
+            {"name": "Thanchi", "lat": 22.2500, "lng": 92.4000},
+            {"name": "Lama", "lat": 22.0000, "lng": 92.1500}
+          ]
+        },
+        {
+          "name": "Khagrachhari",
+          "upazilas": [
+            {"name": "Khagrachhari Sadar", "lat": 23.1083, "lng": 91.9681},
+            {"name": "Dighinala", "lat": 23.2000, "lng": 92.0000},
+            {"name": "Panchhari", "lat": 23.1500, "lng": 91.9500},
+            {"name": "Laxmichhari", "lat": 23.1000, "lng": 91.9000},
+            {"name": "Mohalchhari", "lat": 23.0500, "lng": 91.8500},
+            {"name": "Manikchhari", "lat": 23.0000, "lng": 91.8000},
+            {"name": "Ramgarh", "lat": 22.9500, "lng": 91.7500},
+            {"name": "Matiranga", "lat": 22.9000, "lng": 91.7000},
+            {"name": "Guimara", "lat": 22.8500, "lng": 91.6500}
+          ]
+        },
+        {
+          "name": "Comilla",
+          "upazilas": [
+            {"name": "Comilla Sadar", "lat": 23.4619, "lng": 91.1850},
+            {"name": "Barura", "lat": 23.5000, "lng": 91.2000},
+            {"name": "Brahmanpara", "lat": 23.4500, "lng": 91.1500},
+            {"name": "Burichong", "lat": 23.4000, "lng": 91.1000},
+            {"name": "Chandina", "lat": 23.5500, "lng": 91.2500},
+            {"name": "Chauddagram", "lat": 23.5000, "lng": 91.3000},
+            {"name": "Daudkandi", "lat": 23.4500, "lng": 91.3500},
+            {"name": "Debidwar", "lat": 23.4000, "lng": 91.4000},
+            {"name": "Homna", "lat": 23.3500, "lng": 91.4500},
+            {"name": "Laksam", "lat": 23.3000, "lng": 91.5000},
+            {"name": "Monohorganj", "lat": 23.2500, "lng": 91.5500},
+            {"name": "Meghna", "lat": 23.2000, "lng": 91.6000},
+            {"name": "Muradnagar", "lat": 23.1500, "lng": 91.6500},
+            {"name": "Nangalkot", "lat": 23.1000, "lng": 91.7000},
+            {"name": "Comilla Adarsha Sadar", "lat": 23.4619, "lng": 91.1850},
+            {"name": "Titas", "lat": 23.0500, "lng": 91.7500}
+          ]
+        },
+        {
+          "name": "Feni",
+          "upazilas": [
+            {"name": "Feni Sadar", "lat": 23.0167, "lng": 91.4000},
+            {"name": "Chhagalnaiya", "lat": 23.0500, "lng": 91.4500},
+            {"name": "Daganbhuiyan", "lat": 23.0000, "lng": 91.3500},
+            {"name": "Parshuram", "lat": 22.9500, "lng": 91.3000},
+            {"name": "Fulgazi", "lat": 22.9000, "lng": 91.2500},
+            {"name": "Sonagazi", "lat": 22.8500, "lng": 91.2000}
+          ]
+        },
+        {
+          "name": "Brahmanbaria",
+          "upazilas": [
+            {"name": "Brahmanbaria Sadar", "lat": 23.9667, "lng": 91.1000},
+            {"name": "Ashuganj", "lat": 24.0000, "lng": 91.1500},
+            {"name": "Bancharampur", "lat": 23.9500, "lng": 91.0500},
+            {"name": "Bijoynagar", "lat": 23.9000, "lng": 91.0000},
+            {"name": "Kasba", "lat": 23.8500, "lng": 90.9500},
+            {"name": "Nabinagar", "lat": 23.8000, "lng": 90.9000},
+            {"name": "Nasirnagar", "lat": 23.7500, "lng": 90.8500},
+            {"name": "Sarail", "lat": 23.7000, "lng": 90.8000},
+            {"name": "Akhaura", "lat": 23.6500, "lng": 90.7500}
+          ]
+        },
+        {
+          "name": "Noakhali",
+          "upazilas": [
+            {"name": "Noakhali Sadar", "lat": 22.8333, "lng": 91.1000},
+            {"name": "Begumganj", "lat": 22.9000, "lng": 91.1500},
+            {"name": "Chatkhil", "lat": 22.8000, "lng": 91.0500},
+            {"name": "Companiganj", "lat": 22.7500, "lng": 91.0000},
+            {"name": "Hatiya", "lat": 22.7000, "lng": 90.9500},
+            {"name": "Kabirhat", "lat": 22.6500, "lng": 90.9000},
+            {"name": "Senbagh", "lat": 22.6000, "lng": 90.8500},
+            {"name": "Sonaimuri", "lat": 22.5500, "lng": 90.8000},
+            {"name": "Subarnachar", "lat": 22.5000, "lng": 90.7500}
+          ]
+        },
+        {
+          "name": "Lakshmipur",
+          "upazilas": [
+            {"name": "Lakshmipur Sadar", "lat": 22.9500, "lng": 90.8333},
+            {"name": "Raipur", "lat": 23.0000, "lng": 90.9000},
+            {"name": "Ramganj", "lat": 22.9000, "lng": 90.8000},
+            {"name": "Ramgati", "lat": 22.8500, "lng": 90.7500},
+            {"name": "Kamalnagar", "lat": 22.8000, "lng": 90.7000}
+          ]
+        },
+        {
+          "name": "Chandpur",
+          "upazilas": [
+            {"name": "Chandpur Sadar", "lat": 23.2333, "lng": 90.6500},
+            {"name": "Faridganj", "lat": 23.3000, "lng": 90.7000},
+            {"name": "Haimchar", "lat": 23.2500, "lng": 90.6000},
+            {"name": "Hajiganj", "lat": 23.2000, "lng": 90.5500},
+            {"name": "Kachua", "lat": 23.1500, "lng": 90.5000},
+            {"name": "Matlab Dakshin", "lat": 23.1000, "lng": 90.4500},
+            {"name": "Matlab Uttar", "lat": 23.0500, "lng": 90.4000},
+            {"name": "Shahrasti", "lat": 23.0000, "lng": 90.3500}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sylhet",
+      "districts": [
+        {
+          "name": "Sylhet",
+          "upazilas": [
+            {"name": "Sylhet Sadar", "lat": 24.8949, "lng": 91.8687},
+            {"name": "Balaganj", "lat": 24.7000, "lng": 91.8000},
+            {"name": "Beanibazar", "lat": 24.7500, "lng": 91.9000},
+            {"name": "Bishwanath", "lat": 24.8000, "lng": 91.9500},
+            {"name": "Balaganj", "lat": 24.7000, "lng": 91.8000},
+            {"name": "Companigonj", "lat": 24.6500, "lng": 91.7500},
+            {"name": "Fenchuganj", "lat": 24.6000, "lng": 91.7000},
+            {"name": "Golapganj", "lat": 24.5500, "lng": 91.6500},
+            {"name": "Gowainghat", "lat": 24.5000, "lng": 91.6000},
+            {"name": "Jaintiapur", "lat": 24.4500, "lng": 91.5500},
+            {"name": "Kanaighat", "lat": 24.4000, "lng": 91.5000},
+            {"name": "Osmani Nagar", "lat": 24.3500, "lng": 91.4500},
+            {"name": "Zakiganj", "lat": 24.3000, "lng": 91.4000}
+          ]
+        },
+        {
+          "name": "Moulvibazar",
+          "upazilas": [
+            {"name": "Moulvibazar Sadar", "lat": 24.4833, "lng": 91.7833},
+            {"name": "Barlekha", "lat": 24.5000, "lng": 91.8000},
+            {"name": "Juri", "lat": 24.4500, "lng": 91.7500},
+            {"name": "Kulaura", "lat": 24.4000, "lng": 91.7000},
+            {"name": "Rajnagar", "lat": 24.3500, "lng": 91.6500},
+            {"name": "Sreemangal", "lat": 24.3000, "lng": 91.7333},
+            {"name": "Kamalganj", "lat": 24.2500, "lng": 91.6000}
+          ]
+        },
+        {
+          "name": "Habiganj",
+          "upazilas": [
+            {"name": "Habiganj Sadar", "lat": 24.3833, "lng": 91.4167},
+            {"name": "Ajmiriganj", "lat": 24.4000, "lng": 91.4500},
+            {"name": "Baniachong", "lat": 24.3500, "lng": 91.4000},
+            {"name": "Bahubal", "lat": 24.3000, "lng": 91.3500},
+            {"name": "Chunarughat", "lat": 24.2500, "lng": 91.3000},
+            {"name": "Lakhai", "lat": 24.2000, "lng": 91.2500},
+            {"name": "Madhabpur", "lat": 24.1500, "lng": 91.2000},
+            {"name": "Nabiganj", "lat": 24.1000, "lng": 91.1500}
+          ]
+        },
+        {
+          "name": "Sunamganj",
+          "upazilas": [
+            {"name": "Sunamganj Sadar", "lat": 25.0667, "lng": 91.4167},
+            {"name": "Bishwamvarpur", "lat": 25.1000, "lng": 91.4500},
+            {"name": "Chhatak", "lat": 25.0500, "lng": 91.4000},
+            {"name": "Derai", "lat": 25.0000, "lng": 91.3500},
+            {"name": "Dharampasha", "lat": 24.9500, "lng": 91.3000},
+            {"name": "Dowarabazar", "lat": 24.9000, "lng": 91.2500},
+            {"name": "Jagannathpur", "lat": 24.8500, "lng": 91.2000},
+            {"name": "Jamalganj", "lat": 24.8000, "lng": 91.1500},
+            {"name": "Sulla", "lat": 24.7500, "lng": 91.1000},
+            {"name": "Tahirpur", "lat": 24.7000, "lng": 91.0500}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rajshahi",
+      "districts": [
+        {
+          "name": "Rajshahi",
+          "upazilas": [
+            {"name": "Rajshahi Sadar", "lat": 24.3745, "lng": 88.6042},
+            {"name": "Bagha", "lat": 24.2000, "lng": 88.5000},
+            {"name": "Bagmara", "lat": 24.5000, "lng": 88.7000},
+            {"name": "Charghat", "lat": 24.3000, "lng": 88.5500},
+            {"name": "Durgapur", "lat": 24.4000, "lng": 88.6000},
+            {"name": "Godagari", "lat": 24.2500, "lng": 88.4500},
+            {"name": "Mohanpur", "lat": 24.3500, "lng": 88.6500},
+            {"name": "Paba", "lat": 24.4500, "lng": 88.7500},
+            {"name": "Puthia", "lat": 24.1500, "lng": 88.4000},
+            {"name": "Tanore", "lat": 24.1000, "lng": 88.3500}
+          ]
+        },
+        {
+          "name": "Bogra",
+          "upazilas": [
+            {"name": "Bogra Sadar", "lat": 24.8500, "lng": 89.3667},
+            {"name": "Adamdighi", "lat": 24.9000, "lng": 89.3000},
+            {"name": "Dhunat", "lat": 24.8000, "lng": 89.4000},
+            {"name": "Dhupchanchia", "lat": 24.7500, "lng": 89.4500},
+            {"name": "Gabtali", "lat": 24.7000, "lng": 89.5000},
+            {"name": "Kahaloo", "lat": 24.6500, "lng": 89.5500},
+            {"name": "Nandigram", "lat": 24.6000, "lng": 89.6000},
+            {"name": "Sariakandi", "lat": 24.5500, "lng": 89.6500},
+            {"name": "Shajahanpur", "lat": 24.5000, "lng": 89.7000},
+            {"name": "Sherpur", "lat": 24.4500, "lng": 89.7500},
+            {"name": "Shibganj", "lat": 24.4000, "lng": 89.8000},
+            {"name": "Sonatala", "lat": 24.3500, "lng": 89.8500}
+          ]
+        },
+        {
+          "name": "Joypurhat",
+          "upazilas": [
+            {"name": "Joypurhat Sadar", "lat": 25.1000, "lng": 89.0167},
+            {"name": "Akkelpur", "lat": 25.1500, "lng": 89.0500},
+            {"name": "Kalai", "lat": 25.0500, "lng": 89.0000},
+            {"name": "Khetlal", "lat": 25.0000, "lng": 88.9500},
+            {"name": "Panchbibi", "lat": 24.9500, "lng": 88.9000}
+          ]
+        },
+        {
+          "name": "Naogaon",
+          "upazilas": [
+            {"name": "Naogaon Sadar", "lat": 24.8000, "lng": 88.9333},
+            {"name": "Atrai", "lat": 24.8500, "lng": 88.9500},
+            {"name": "Badalgachhi", "lat": 24.7500, "lng": 88.9000},
+            {"name": "Dhamoirhat", "lat": 24.7000, "lng": 88.8500},
+            {"name": "Manda", "lat": 24.6500, "lng": 88.8000},
+            {"name": "Mahadevpur", "lat": 24.6000, "lng": 88.7500},
+            {"name": "Niamatpur", "lat": 24.5500, "lng": 88.7000},
+            {"name": "Patnitala", "lat": 24.5000, "lng": 88.6500},
+            {"name": "Porsha", "lat": 24.4500, "lng": 88.6000},
+            {"name": "Raninagar", "lat": 24.4000, "lng": 88.5500},
+            {"name": "Sapahar", "lat": 24.3500, "lng": 88.5000}
+          ]
+        },
+        {
+          "name": "Natore",
+          "upazilas": [
+            {"name": "Natore Sadar", "lat": 24.4167, "lng": 89.0833},
+            {"name": "Bagatipara", "lat": 24.4500, "lng": 89.1000},
+            {"name": "Baraigram", "lat": 24.4000, "lng": 89.0500},
+            {"name": "Gurudaspur", "lat": 24.3500, "lng": 89.0000},
+            {"name": "Lalpur", "lat": 24.3000, "lng": 88.9500},
+            {"name": "Naldanga", "lat": 24.2500, "lng": 88.9000},
+            {"name": "Singra", "lat": 24.2000, "lng": 88.8500}
+          ]
+        },
+        {
+          "name": "Chapainawabganj",
+          "upazilas": [
+            {"name": "Chapainawabganj Sadar", "lat": 24.6000, "lng": 88.2833},
+            {"name": "Bholahat", "lat": 24.6500, "lng": 88.3000},
+            {"name": "Gomastapur", "lat": 24.5500, "lng": 88.2500},
+            {"name": "Nachole", "lat": 24.5000, "lng": 88.2000},
+            {"name": "Shibganj", "lat": 24.4500, "lng": 88.1500}
+          ]
+        },
+        {
+          "name": "Pabna",
+          "upazilas": [
+            {"name": "Pabna Sadar", "lat": 24.0000, "lng": 89.2500},
+            {"name": "Atgharia", "lat": 24.0500, "lng": 89.3000},
+            {"name": "Bera", "lat": 24.1000, "lng": 89.3500},
+            {"name": "Bhangura", "lat": 24.1500, "lng": 89.4000},
+            {"name": "Chatmohar", "lat": 24.2000, "lng": 89.4500},
+            {"name": "Faridpur", "lat": 24.2500, "lng": 89.5000},
+            {"name": "Ishwardi", "lat": 24.3000, "lng": 89.5500},
+            {"name": "Pabna Sadar", "lat": 24.0000, "lng": 89.2500},
+            {"name": "Santhia", "lat": 23.9500, "lng": 89.2000},
+            {"name": "Sujanagar", "lat": 23.9000, "lng": 89.1500}
+          ]
+        },
+        {
+          "name": "Sirajganj",
+          "upazilas": [
+            {"name": "Sirajganj Sadar", "lat": 24.4500, "lng": 89.7167},
+            {"name": "Belkuchi", "lat": 24.5000, "lng": 89.7500},
+            {"name": "Chauhali", "lat": 24.4000, "lng": 89.7000},
+            {"name": "Kamarkhanda", "lat": 24.3500, "lng": 89.6500},
+            {"name": "Kazipur", "lat": 24.3000, "lng": 89.6000},
+            {"name": "Raiganj", "lat": 24.2500, "lng": 89.5500},
+            {"name": "Shahjadpur", "lat": 24.2000, "lng": 89.5000},
+            {"name": "Tarash", "lat": 24.1500, "lng": 89.4500},
+            {"name": "Ullahpara", "lat": 24.1000, "lng": 89.4000}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Khulna",
+      "districts": [
+        {
+          "name": "Khulna",
+          "upazilas": [
+            {"name": "Khulna Sadar", "lat": 22.8088, "lng": 89.2464},
+            {"name": "Batiaghata", "lat": 22.7500, "lng": 89.2000},
+            {"name": "Dacope", "lat": 22.6000, "lng": 89.1000},
+            {"name": "Dumuria", "lat": 22.7000, "lng": 89.2000},
+            {"name": "Dighalia", "lat": 22.6500, "lng": 89.1500},
+            {"name": "Dumuria", "lat": 22.7000, "lng": 89.2000},
+            {"name": "Dacope", "lat": 22.6000, "lng": 89.1000},
+            {"name": "Koyra", "lat": 22.5500, "lng": 89.0500},
+            {"name": "Paikgachha", "lat": 22.5000, "lng": 89.0000},
+            {"name": "Phultala", "lat": 22.4500, "lng": 88.9500},
+            {"name": "Rupsa", "lat": 22.4000, "lng": 88.9000},
+            {"name": "Terokhada", "lat": 22.3500, "lng": 88.8500}
+          ]
+        },
+        {
+          "name": "Bagerhat",
+          "upazilas": [
+            {"name": "Bagerhat Sadar", "lat": 22.6516, "lng": 89.7855},
+            {"name": "Chitalmari", "lat": 22.7000, "lng": 89.8000},
+            {"name": "Fakirhat", "lat": 22.7500, "lng": 89.8500},
+            {"name": "Kachua", "lat": 22.6500, "lng": 89.7500},
+            {"name": "Mollahat", "lat": 22.6000, "lng": 89.7000},
+            {"name": "Mongla", "lat": 22.5000, "lng": 89.6000},
+            {"name": "Morrelganj", "lat": 22.5500, "lng": 89.6500},
+            {"name": "Rampal", "lat": 22.5000, "lng": 89.5500},
+            {"name": "Sarankhola", "lat": 22.4500, "lng": 89.5000}
+          ]
+        },
+        {
+          "name": "Satkhira",
+          "upazilas": [
+            {"name": "Satkhira Sadar", "lat": 22.7167, "lng": 89.0833},
+            {"name": "Assasuni", "lat": 22.7500, "lng": 89.1000},
+            {"name": "Debhata", "lat": 22.7000, "lng": 89.0500},
+            {"name": "Kalaroa", "lat": 22.6500, "lng": 89.0000},
+            {"name": "Kaliganj", "lat": 22.6000, "lng": 88.9500},
+            {"name": "Satkhira Sadar", "lat": 22.7167, "lng": 89.0833},
+            {"name": "Shyamnagar", "lat": 22.5500, "lng": 88.9000},
+            {"name": "Tala", "lat": 22.5000, "lng": 88.8500}
+          ]
+        },
+        {
+          "name": "Jessore",
+          "upazilas": [
+            {"name": "Jessore Sadar", "lat": 23.1667, "lng": 89.2167},
+            {"name": "Abhaynagar", "lat": 23.2000, "lng": 89.2500},
+            {"name": "Bagherpara", "lat": 23.1500, "lng": 89.2000},
+            {"name": "Chaugachha", "lat": 23.1000, "lng": 89.1500},
+            {"name": "Jhikargachha", "lat": 23.0500, "lng": 89.1000},
+            {"name": "Keshabpur", "lat": 23.0000, "lng": 89.0500},
+            {"name": "Manirampur", "lat": 22.9500, "lng": 89.0000},
+            {"name": "Sharsha", "lat": 22.9000, "lng": 88.9500}
+          ]
+        },
+        {
+          "name": "Jhenaidah",
+          "upazilas": [
+            {"name": "Jhenaidah Sadar", "lat": 23.5333, "lng": 89.0167},
+            {"name": "Harinakunda", "lat": 23.6000, "lng": 89.0500},
+            {"name": "Kaliganj", "lat": 23.5500, "lng": 89.0000},
+            {"name": "Kotchandpur", "lat": 23.5000, "lng": 88.9500},
+            {"name": "Maheshpur", "lat": 23.4500, "lng": 88.9000},
+            {"name": "Shailkupa", "lat": 23.4000, "lng": 88.8500}
+          ]
+        },
+        {
+          "name": "Magura",
+          "upazilas": [
+            {"name": "Magura Sadar", "lat": 23.4833, "lng": 89.4167},
+            {"name": "Mohammadpur", "lat": 23.5000, "lng": 89.4500},
+            {"name": "Shalikha", "lat": 23.4500, "lng": 89.4000},
+            {"name": "Sreepur", "lat": 23.4000, "lng": 89.3500}
+          ]
+        },
+        {
+          "name": "Narail",
+          "upazilas": [
+            {"name": "Narail Sadar", "lat": 23.1667, "lng": 89.5000},
+            {"name": "Kalia", "lat": 23.2000, "lng": 89.5500},
+            {"name": "Lohagara", "lat": 23.1500, "lng": 89.5000}
+          ]
+        },
+        {
+          "name": "Chuadanga",
+          "upazilas": [
+            {"name": "Chuadanga Sadar", "lat": 23.6500, "lng": 88.8500},
+            {"name": "Alamdanga", "lat": 23.7000, "lng": 88.9000},
+            {"name": "Damurhuda", "lat": 23.6000, "lng": 88.8000},
+            {"name": "Jibannagar", "lat": 23.5500, "lng": 88.7500}
+          ]
+        },
+        {
+          "name": "Kushtia",
+          "upazilas": [
+            {"name": "Kushtia Sadar", "lat": 23.9000, "lng": 89.1333},
+            {"name": "Bheramara", "lat": 23.9500, "lng": 89.1500},
+            {"name": "Daulatpur", "lat": 23.8500, "lng": 89.1000},
+            {"name": "Khoksa", "lat": 23.8000, "lng": 89.0500},
+            {"name": "Kumarkhali", "lat": 23.7500, "lng": 89.0000},
+            {"name": "Mirpur", "lat": 23.7000, "lng": 88.9500}
+          ]
+        },
+        {
+          "name": "Meherpur",
+          "upazilas": [
+            {"name": "Meherpur Sadar", "lat": 23.7833, "lng": 88.6667},
+            {"name": "Gangni", "lat": 23.8000, "lng": 88.7000},
+            {"name": "Mujibnagar", "lat": 23.7500, "lng": 88.6500}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Barisal",
+      "districts": [
+        {
+          "name": "Barisal",
+          "upazilas": [
+            {"name": "Barisal Sadar", "lat": 22.7010, "lng": 90.3535},
+            {"name": "Agailjhara", "lat": 22.7500, "lng": 90.4000},
+            {"name": "Babuganj", "lat": 22.8000, "lng": 90.4000},
+            {"name": "Bakerganj", "lat": 22.6000, "lng": 90.3000},
+            {"name": "Banaripara", "lat": 22.5500, "lng": 90.2500},
+            {"name": "Gaurnadi", "lat": 22.5000, "lng": 90.2000},
+            {"name": "Hizla", "lat": 22.4500, "lng": 90.1500},
+            {"name": "Mehendiganj", "lat": 22.4000, "lng": 90.1000},
+            {"name": "Muladi", "lat": 22.3500, "lng": 90.0500},
+            {"name": "Wazirpur", "lat": 22.3000, "lng": 90.0000}
+          ]
+        },
+        {
+          "name": "Barguna",
+          "upazilas": [
+            {"name": "Barguna Sadar", "lat": 22.1500, "lng": 90.1167},
+            {"name": "Amtali", "lat": 22.2000, "lng": 90.1500},
+            {"name": "Bamna", "lat": 22.1000, "lng": 90.1000},
+            {"name": "Betagi", "lat": 22.0500, "lng": 90.0500},
+            {"name": "Patharghata", "lat": 22.0000, "lng": 90.0000},
+            {"name": "Taltali", "lat": 21.9500, "lng": 89.9500}
+          ]
+        },
+        {
+          "name": "Bhola",
+          "upazilas": [
+            {"name": "Bhola Sadar", "lat": 22.6833, "lng": 90.6500},
+            {"name": "Borhanuddin", "lat": 22.7000, "lng": 90.7000},
+            {"name": "Char Fasson", "lat": 22.6500, "lng": 90.6000},
+            {"name": "Daulatkhan", "lat": 22.6000, "lng": 90.5500},
+            {"name": "Lalmohan", "lat": 22.5500, "lng": 90.5000},
+            {"name": "Manpura", "lat": 22.5000, "lng": 90.4500},
+            {"name": "Tazumuddin", "lat": 22.4500, "lng": 90.4000}
+          ]
+        },
+        {
+          "name": "Jhalokati",
+          "upazilas": [
+            {"name": "Jhalokati Sadar", "lat": 22.6500, "lng": 90.2000},
+            {"name": "Kathalia", "lat": 22.7000, "lng": 90.2500},
+            {"name": "Nalchity", "lat": 22.6000, "lng": 90.1500},
+            {"name": "Rajapur", "lat": 22.5500, "lng": 90.1000}
+          ]
+        },
+        {
+          "name": "Patuakhali",
+          "upazilas": [
+            {"name": "Patuakhali Sadar", "lat": 22.3500, "lng": 90.3167},
+            {"name": "Bauphal", "lat": 22.4000, "lng": 90.3500},
+            {"name": "Dashmina", "lat": 22.3000, "lng": 90.3000},
+            {"name": "Dumki", "lat": 22.2500, "lng": 90.2500},
+            {"name": "Galachipa", "lat": 22.2000, "lng": 90.2000},
+            {"name": "Kalapara", "lat": 22.1500, "lng": 90.1500},
+            {"name": "Mirzaganj", "lat": 22.1000, "lng": 90.1000},
+            {"name": "Rangabali", "lat": 22.0500, "lng": 90.0500}
+          ]
+        },
+        {
+          "name": "Pirojpur",
+          "upazilas": [
+            {"name": "Pirojpur Sadar", "lat": 22.5833, "lng": 90.0000},
+            {"name": "Bhandaria", "lat": 22.6000, "lng": 90.0500},
+            {"name": "Kawkhali", "lat": 22.5500, "lng": 90.0000},
+            {"name": "Mathbaria", "lat": 22.5000, "lng": 89.9500},
+            {"name": "Nazirpur", "lat": 22.7000, "lng": 90.1000},
+            {"name": "Nesarabad", "lat": 22.4500, "lng": 89.9000},
+            {"name": "Zianagar", "lat": 22.4000, "lng": 89.8500}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rangpur",
+      "districts": [
+        {
+          "name": "Rangpur",
+          "upazilas": [
+            {"name": "Rangpur Sadar", "lat": 25.7439, "lng": 89.2752},
+            {"name": "Badarganj", "lat": 25.8000, "lng": 89.2000},
+            {"name": "Gangachara", "lat": 25.7000, "lng": 89.3000},
+            {"name": "Kaunia", "lat": 25.7500, "lng": 89.2500},
+            {"name": "Mithapukur", "lat": 25.6500, "lng": 89.3500},
+            {"name": "Pirgacha", "lat": 25.6000, "lng": 89.4000},
+            {"name": "Pirganj", "lat": 25.5500, "lng": 89.4500},
+            {"name": "Taraganj", "lat": 25.5000, "lng": 89.5000}
+          ]
+        },
+        {
+          "name": "Dinajpur",
+          "upazilas": [
+            {"name": "Dinajpur Sadar", "lat": 25.6217, "lng": 88.6356},
+            {"name": "Birampur", "lat": 25.7000, "lng": 88.6000},
+            {"name": "Birganj", "lat": 25.6500, "lng": 88.6500},
+            {"name": "Biral", "lat": 25.6000, "lng": 88.7000},
+            {"name": "Bochaganj", "lat": 25.5500, "lng": 88.7500},
+            {"name": "Chirirbandar", "lat": 25.5000, "lng": 88.8000},
+            {"name": "Fulbari", "lat": 25.4500, "lng": 88.8500},
+            {"name": "Ghoraghat", "lat": 25.4000, "lng": 88.9000},
+            {"name": "Hakimpur", "lat": 25.3500, "lng": 88.9500},
+            {"name": "Kaharole", "lat": 25.3000, "lng": 89.0000},
+            {"name": "Khansama", "lat": 25.2500, "lng": 89.0500},
+            {"name": "Nawabganj", "lat": 25.2000, "lng": 89.1000},
+            {"name": "Parbatipur", "lat": 25.1500, "lng": 89.1500}
+          ]
+        },
+        {
+          "name": "Gaibandha",
+          "upazilas": [
+            {"name": "Gaibandha Sadar", "lat": 25.2500, "lng": 89.5333},
+            {"name": "Fulchhari", "lat": 25.3000, "lng": 89.5500},
+            {"name": "Gobindaganj", "lat": 25.2000, "lng": 89.5000},
+            {"name": "Palashbari", "lat": 25.1500, "lng": 89.4500},
+            {"name": "Sadullapur", "lat": 25.1000, "lng": 89.4000},
+            {"name": "Saghata", "lat": 25.0500, "lng": 89.3500},
+            {"name": "Sundarganj", "lat": 25.0000, "lng": 89.3000}
+          ]
+        },
+        {
+          "name": "Kurigram",
+          "upazilas": [
+            {"name": "Kurigram Sadar", "lat": 25.8167, "lng": 89.6500},
+            {"name": "Bhurungamari", "lat": 25.8500, "lng": 89.7000},
+            {"name": "Char Rajibpur", "lat": 25.8000, "lng": 89.6000},
+            {"name": "Chilmari", "lat": 25.7500, "lng": 89.5500},
+            {"name": "Phulbari", "lat": 25.7000, "lng": 89.5000},
+            {"name": "Nageshwari", "lat": 25.6500, "lng": 89.4500},
+            {"name": "Rajarhat", "lat": 25.6000, "lng": 89.4000},
+            {"name": "Raomari", "lat": 25.5500, "lng": 89.3500},
+            {"name": "Ulipur", "lat": 25.5000, "lng": 89.3000}
+          ]
+        },
+        {
+          "name": "Lalmonirhat",
+          "upazilas": [
+            {"name": "Lalmonirhat Sadar", "lat": 25.9167, "lng": 89.4500},
+            {"name": "Aditmari", "lat": 25.9500, "lng": 89.5000},
+            {"name": "Hatibandha", "lat": 25.9000, "lng": 89.4000},
+            {"name": "Kaliganj", "lat": 25.8500, "lng": 89.3500},
+            {"name": "Patgram", "lat": 25.8000, "lng": 89.3000}
+          ]
+        },
+        {
+          "name": "Nilphamari",
+          "upazilas": [
+            {"name": "Nilphamari Sadar", "lat": 25.9333, "lng": 88.8500},
+            {"name": "Dimla", "lat": 26.0000, "lng": 88.9000},
+            {"name": "Domar", "lat": 25.9500, "lng": 88.8000},
+            {"name": "Jaldhaka", "lat": 25.9000, "lng": 88.7500},
+            {"name": "Kishoreganj", "lat": 25.8500, "lng": 88.7000},
+            {"name": "Saidpur", "lat": 25.8000, "lng": 88.6500}
+          ]
+        },
+        {
+          "name": "Panchagarh",
+          "upazilas": [
+            {"name": "Panchagarh Sadar", "lat": 26.3333, "lng": 88.5667},
+            {"name": "Atwari", "lat": 26.4000, "lng": 88.6000},
+            {"name": "Boda", "lat": 26.3000, "lng": 88.5500},
+            {"name": "Debiganj", "lat": 26.2500, "lng": 88.5000},
+            {"name": "Tetulia", "lat": 26.2000, "lng": 88.4500}
+          ]
+        },
+        {
+          "name": "Thakurgaon",
+          "upazilas": [
+            {"name": "Thakurgaon Sadar", "lat": 26.0333, "lng": 88.4667},
+            {"name": "Baliadangi", "lat": 26.1000, "lng": 88.5000},
+            {"name": "Haripur", "lat": 26.0000, "lng": 88.4500},
+            {"name": "Pirganj", "lat": 25.9500, "lng": 88.4000},
+            {"name": "Ranisankail", "lat": 25.9000, "lng": 88.3500}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mymensingh",
+      "districts": [
+        {
+          "name": "Mymensingh",
+          "upazilas": [
+            {"name": "Mymensingh Sadar", "lat": 24.7471, "lng": 90.4203},
+            {"name": "Bhaluka", "lat": 24.8000, "lng": 90.5000},
+            {"name": "Dhobaura", "lat": 24.7000, "lng": 90.4000},
+            {"name": "Fulbaria", "lat": 24.7500, "lng": 90.4500},
+            {"name": "Gaffargaon", "lat": 24.6500, "lng": 90.3500},
+            {"name": "Gauripur", "lat": 24.6000, "lng": 90.3000},
+            {"name": "Haluaghat", "lat": 24.5500, "lng": 90.2500},
+            {"name": "Ishwarganj", "lat": 24.5000, "lng": 90.2000},
+            {"name": "Muktagachha", "lat": 24.4500, "lng": 90.1500},
+            {"name": "Nandail", "lat": 24.4000, "lng": 90.1000},
+            {"name": "Phulpur", "lat": 24.3500, "lng": 90.0500},
+            {"name": "Tarakanda", "lat": 24.3000, "lng": 90.0000}
+          ]
+        },
+        {
+          "name": "Jamalpur",
+          "upazilas": [
+            {"name": "Jamalpur Sadar", "lat": 24.9167, "lng": 89.9333},
+            {"name": "Baksiganj", "lat": 24.9500, "lng": 89.9500},
+            {"name": "Dewanganj", "lat": 24.9000, "lng": 89.9000},
+            {"name": "Islampur", "lat": 24.8500, "lng": 89.8500},
+            {"name": "Madarganj", "lat": 24.8000, "lng": 89.8000},
+            {"name": "Melandaha", "lat": 24.7500, "lng": 89.7500},
+            {"name": "Sarishabari", "lat": 24.7000, "lng": 89.7000}
+          ]
+        },
+        {
+          "name": "Netrokona",
+          "upazilas": [
+            {"name": "Netrokona Sadar", "lat": 24.8833, "lng": 90.7167},
+            {"name": "Atpara", "lat": 24.9000, "lng": 90.8000},
+            {"name": "Barhatta", "lat": 24.8500, "lng": 90.7500},
+            {"name": "Durgapur", "lat": 24.8000, "lng": 90.7000},
+            {"name": "Khaliajuri", "lat": 24.7500, "lng": 90.6500},
+            {"name": "Kalmakanda", "lat": 24.7000, "lng": 90.6000},
+            {"name": "Kendua", "lat": 24.6500, "lng": 90.5500},
+            {"name": "Madan", "lat": 24.6000, "lng": 90.5000},
+            {"name": "Mohanganj", "lat": 24.5500, "lng": 90.4500},
+            {"name": "Purbadhala", "lat": 24.5000, "lng": 90.4000}
+          ]
+        },
+        {
+          "name": "Sherpur",
+          "upazilas": [
+            {"name": "Sherpur Sadar", "lat": 25.0167, "lng": 90.0167},
+            {"name": "Jhenaigati", "lat": 25.0500, "lng": 90.0500},
+            {"name": "Nakla", "lat": 25.0000, "lng": 90.0000},
+            {"name": "Nalitabari", "lat": 24.9500, "lng": 89.9500},
+            {"name": "Sreebardi", "lat": 24.9000, "lng": 89.9000}
+          ]
+        }
+      ]
+    }
+  ]
+}

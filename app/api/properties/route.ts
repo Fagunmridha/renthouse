@@ -17,7 +17,22 @@ export async function GET(request: NextRequest) {
     const rooms = searchParams.get("rooms")
 
     if (location) {
-      where.location = location
+      // Handle location matching: if it contains comma, match exactly
+      // If only district, match properties starting with that district
+      const trimmedLocation = decodeURIComponent(location).trim()
+      if (trimmedLocation.includes(",")) {
+        // Exact match for "District, Upazila" format
+        // Also match if property location starts with this (for partial matches)
+        where.OR = [
+          { location: trimmedLocation },
+          { location: { startsWith: trimmedLocation } },
+        ]
+      } else {
+        // Match properties that start with this district (for district-only search)
+        where.location = {
+          startsWith: trimmedLocation,
+        }
+      }
     }
     if (familyType) {
       where.familyType = familyType
@@ -44,6 +59,20 @@ export async function GET(request: NextRequest) {
       where,
       orderBy: { createdAt: "desc" },
     })
+
+    // Debug logging (remove in production)
+    if (process.env.NODE_ENV === "development") {
+      console.log("API Query Filters:", JSON.stringify(where, null, 2))
+      console.log("Found properties:", dbProperties.length)
+      if (dbProperties.length > 0) {
+        console.log("Sample property:", {
+          id: dbProperties[0].id,
+          location: dbProperties[0].location,
+          approved: dbProperties[0].approved,
+          familyType: dbProperties[0].familyType,
+        })
+      }
+    }
 
     // Convert Prisma model to Property type (parse images JSON string)
     const properties: Property[] = dbProperties.map((p) => ({

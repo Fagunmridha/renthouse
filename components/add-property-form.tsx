@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Loader2, Plus, X, Upload } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,7 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/hooks/use-toast"
 import type { Property, FamilyType } from "@/lib/types"
-import { locations, getCurrentUser } from "@/lib/mock-data"
+import { getCurrentUser } from "@/lib/mock-data"
+import { getAllDistricts, getUpazilasByDistrict } from "@/lib/bangladesh-locations"
 
 const familyTypes: { value: FamilyType; label: string }[] = [
   { value: "SMALL_FAMILY", label: "Small Family" },
@@ -31,6 +32,12 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
   const isEditing = !!property
 
   const [loading, setLoading] = useState(false)
+  const [districts, setDistricts] = useState<string[]>([])
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("")
+  const [upazilas, setUpazilas] = useState<Array<{ name: string; lat: number; lng: number }>>([])
+  const [selectedUpazila, setSelectedUpazila] = useState<string>("")
+  const [selectedArea, setSelectedArea] = useState<string>("")
+  const [locationsLoading, setLocationsLoading] = useState(true)
   const [formData, setFormData] = useState({
     title: property?.title || "",
     description: property?.description || "",
@@ -44,6 +51,75 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
   })
   const [images, setImages] = useState<string[]>(property?.images || [])
   const [newImageUrl, setNewImageUrl] = useState("")
+
+  // Parse existing location if editing (format: "District, Upazila" or "District, Upazila, Area")
+  useEffect(() => {
+    if (property?.location) {
+      const parts = property.location.split(", ").map((p) => p.trim())
+      if (parts.length >= 2) {
+        setSelectedDistrict(parts[0])
+        setSelectedUpazila(parts[1])
+        if (parts.length >= 3) {
+          setSelectedArea(parts[2])
+        }
+      }
+    }
+  }, [property])
+
+  // Load districts on component mount
+  useEffect(() => {
+    const loadDistricts = async () => {
+      try {
+        const allDistricts = await getAllDistricts()
+        setDistricts(allDistricts)
+      } catch (error) {
+        console.error("Error loading districts:", error)
+        toast({
+          title: "Warning",
+          description: "Could not load districts. Please refresh the page.",
+          variant: "destructive",
+        })
+      } finally {
+        setLocationsLoading(false)
+      }
+    }
+
+    loadDistricts()
+  }, [toast])
+
+  // Load upazilas when district is selected
+  useEffect(() => {
+    const loadUpazilas = async () => {
+      if (!selectedDistrict) {
+        setUpazilas([])
+        setSelectedUpazila("")
+        setSelectedArea("")
+        return
+      }
+
+      try {
+        const districtUpazilas = await getUpazilasByDistrict(selectedDistrict)
+        setUpazilas(districtUpazilas)
+        setSelectedUpazila("")
+        setSelectedArea("")
+      } catch (error) {
+        console.error("Error loading upazilas:", error)
+      }
+    }
+
+    loadUpazilas()
+  }, [selectedDistrict])
+
+  // Update location field when selections change
+  useEffect(() => {
+    if (selectedDistrict && selectedUpazila) {
+      let locationString = `${selectedDistrict}, ${selectedUpazila}`
+      if (selectedArea) {
+        locationString += `, ${selectedArea}`
+      }
+      setFormData({ ...formData, location: locationString })
+    }
+  }, [selectedDistrict, selectedUpazila, selectedArea])
 
   const addImageUrl = () => {
     if (newImageUrl.trim()) {
@@ -72,6 +148,17 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+
+    // Validate location fields
+    if (!selectedDistrict || !selectedUpazila) {
+      toast({
+        title: "Error",
+        description: "Please select both District and Upazila/Thana.",
+        variant: "destructive",
+      })
+      setLoading(false)
+      return
+    }
 
     const user = getCurrentUser()
     if (!user) {
@@ -188,25 +275,98 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="location">Location</Label>
-          <Select
-            value={formData.location}
-            onValueChange={(value) => setFormData({ ...formData, location: value })}
+          <Label htmlFor="price">Monthly Price ($)</Label>
+          <Input
+            id="price"
+            type="number"
+            placeholder="2500"
+            min={0}
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
             required
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select location" />
-            </SelectTrigger>
-            <SelectContent>
-              {locations.map((loc) => (
-                <SelectItem key={loc} value={loc}>
-                  {loc}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          />
         </div>
+      </div>
 
+      {/* Location Fields - Grouped together */}
+      <div className="space-y-4">
+        <Label className="text-base font-semibold">Location</Label>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="district">District *</Label>
+            <Select
+              value={selectedDistrict}
+              onValueChange={(value) => {
+                setSelectedDistrict(value)
+                setSelectedUpazila("")
+                setSelectedArea("")
+              }}
+              required
+              disabled={locationsLoading}
+            >
+              <SelectTrigger id="district">
+                <SelectValue placeholder={locationsLoading ? "Loading districts..." : "Select District"} />
+              </SelectTrigger>
+              <SelectContent>
+                {districts.length > 0 ? (
+                  districts.map((district) => (
+                    <SelectItem key={district} value={district}>
+                      {district}
+                    </SelectItem>
+                  ))
+                ) : (
+                  <SelectItem value="no-districts" disabled>
+                    No districts available
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="upazila">Upazila/Thana *</Label>
+            <Select
+              value={selectedUpazila}
+              onValueChange={(value) => {
+                setSelectedUpazila(value)
+                setSelectedArea("")
+              }}
+              required
+              disabled={!selectedDistrict || upazilas.length === 0}
+            >
+              <SelectTrigger id="upazila">
+                <SelectValue placeholder={!selectedDistrict ? "Select District first" : "Select Upazila/Thana"} />
+              </SelectTrigger>
+              <SelectContent>
+                {upazilas.length > 0 ? (
+                  upazilas.map((upazila) => (
+                    <SelectItem key={upazila.name} value={upazila.name}>
+                      {upazila.name}
+                    </SelectItem>
+                  ))
+                ) : (
+                  <SelectItem value="no-upazilas" disabled>
+                    {selectedDistrict ? "No upazilas available" : "Select District first"}
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="area">Area (Optional)</Label>
+            <Input
+              id="area"
+              placeholder="Enter area name (e.g., Dhanmondi 27, Gulshan 2)"
+              value={selectedArea}
+              onChange={(e) => setSelectedArea(e.target.value)}
+              disabled={!selectedUpazila}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="familyType">Family Type</Label>
           <Select
@@ -225,19 +385,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
               ))}
             </SelectContent>
           </Select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="price">Monthly Price ($)</Label>
-          <Input
-            id="price"
-            type="number"
-            placeholder="2500"
-            min={0}
-            value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            required
-          />
         </div>
 
         <div className="space-y-2">

@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { Search, X, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { locations } from "@/lib/mock-data"
+import { getAllDistricts, getUpazilasByDistrict } from "@/lib/bangladesh-locations"
 import type { FamilyType } from "@/lib/types"
 
 const familyTypes: { value: FamilyType; label: string }[] = [
@@ -26,6 +26,10 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
+  const [districts, setDistricts] = useState<string[]>([])
+  const [selectedDistrict, setSelectedDistrict] = useState<string>("all")
+  const [upazilas, setUpazilas] = useState<Array<{ name: string; lat: number; lng: number }>>([])
+  const [selectedUpazila, setSelectedUpazila] = useState<string>("all")
   const [location, setLocation] = useState(searchParams.get("location") || "")
   const [familyType, setFamilyType] = useState(searchParams.get("familyType") || "")
   const [priceRange, setPriceRange] = useState<[number, number]>([
@@ -34,10 +38,82 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
   ])
   const [rooms, setRooms] = useState(searchParams.get("rooms") || "")
 
+  // Parse location from URL params
+  useEffect(() => {
+    const urlLocation = searchParams.get("location") || ""
+    if (urlLocation) {
+      const parts = urlLocation.split(", ").map((p) => p.trim())
+      if (parts.length >= 1 && parts[0]) {
+        setSelectedDistrict(parts[0])
+        if (parts.length >= 2 && parts[1]) {
+          setSelectedUpazila(parts[1])
+        } else {
+          setSelectedUpazila("all")
+        }
+      } else {
+        setSelectedDistrict("all")
+        setSelectedUpazila("all")
+      }
+    } else {
+      setSelectedDistrict("all")
+      setSelectedUpazila("all")
+    }
+  }, [searchParams])
+
+  // Load districts on component mount
+  useEffect(() => {
+    const loadDistricts = async () => {
+      try {
+        const allDistricts = await getAllDistricts()
+        setDistricts(allDistricts)
+      } catch (error) {
+        console.error("Error loading districts:", error)
+      }
+    }
+
+    loadDistricts()
+  }, [])
+
+  // Load upazilas when district is selected
+  useEffect(() => {
+    const loadUpazilas = async () => {
+      if (!selectedDistrict || selectedDistrict === "all") {
+        setUpazilas([])
+        setSelectedUpazila("all")
+        setLocation("")
+        return
+      }
+
+      try {
+        const districtUpazilas = await getUpazilasByDistrict(selectedDistrict)
+        setUpazilas(districtUpazilas)
+        // Keep selected upazila if it exists in the new list
+        if (selectedUpazila && selectedUpazila !== "all" && !districtUpazilas.find((u) => u.name === selectedUpazila)) {
+          setSelectedUpazila("all")
+        }
+      } catch (error) {
+        console.error("Error loading upazilas:", error)
+      }
+    }
+
+    loadUpazilas()
+  }, [selectedDistrict, selectedUpazila])
+
+  // Update location string when selections change
+  useEffect(() => {
+    if (selectedDistrict && selectedDistrict !== "all" && selectedUpazila && selectedUpazila !== "all") {
+      setLocation(`${selectedDistrict}, ${selectedUpazila}`)
+    } else if (selectedDistrict && selectedDistrict !== "all") {
+      setLocation(selectedDistrict)
+    } else {
+      setLocation("")
+    }
+  }, [selectedDistrict, selectedUpazila])
+
   const applyFilters = useCallback(() => {
     const params = new URLSearchParams()
-    if (location && location !== "all") params.set("location", location)
-    if (familyType && familyType !== "all") params.set("familyType", familyType)
+    if (location && location !== "") params.set("location", location)
+    if (familyType && familyType !== "all" && familyType !== "") params.set("familyType", familyType)
     if (priceRange[0] > 0) params.set("minPrice", priceRange[0].toString())
     if (priceRange[1] < 10000) params.set("maxPrice", priceRange[1].toString())
     if (rooms) params.set("rooms", rooms)
@@ -46,6 +122,8 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
   }, [location, familyType, priceRange, rooms, router])
 
   const clearFilters = useCallback(() => {
+    setSelectedDistrict("all")
+    setSelectedUpazila("all")
     setLocation("")
     setFamilyType("")
     setPriceRange([0, 10000])
@@ -55,21 +133,53 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
 
   const FilterContent = () => (
     <div className="space-y-6">
-      <div className="space-y-2">
+      <div className="space-y-4">
         <Label>Location</Label>
-        <Select value={location} onValueChange={setLocation}>
-          <SelectTrigger>
-            <SelectValue placeholder="All Locations" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Locations</SelectItem>
-            {locations.map((loc) => (
-              <SelectItem key={loc} value={loc}>
-                {loc}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label className="text-sm">District</Label>
+            <Select
+              value={selectedDistrict}
+              onValueChange={(value) => {
+                setSelectedDistrict(value)
+                setSelectedUpazila("all")
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="All Districts" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Districts</SelectItem>
+                {districts.map((district) => (
+                  <SelectItem key={district} value={district}>
+                    {district}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-sm">Upazila/Thana</Label>
+            <Select
+              value={selectedUpazila}
+              onValueChange={setSelectedUpazila}
+              disabled={!selectedDistrict || selectedDistrict === "all"}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={selectedDistrict && selectedDistrict !== "all" ? "All Upazilas" : "Select District first"} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Upazilas</SelectItem>
+                {upazilas.map((upazila) => (
+                  <SelectItem key={upazila.name} value={upazila.name}>
+                    {upazila.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-2">
