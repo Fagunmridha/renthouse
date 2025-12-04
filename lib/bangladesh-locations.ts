@@ -22,9 +22,7 @@ interface BangladeshLocations {
 let cachedLocations: BangladeshLocations | null = null
 let cachedLocationList: string[] | null = null
 
-/**
- * Load Bangladesh locations from JSON file
- */
+
 export async function loadBangladeshLocations(): Promise<BangladeshLocations> {
   if (cachedLocations) {
     return cachedLocations
@@ -44,9 +42,7 @@ export async function loadBangladeshLocations(): Promise<BangladeshLocations> {
   }
 }
 
-/**
- * Get all locations as a flat list (format: "Division, District, Upazila")
- */
+
 export async function getAllBangladeshLocations(): Promise<string[]> {
   if (cachedLocationList) {
     return cachedLocationList
@@ -67,9 +63,7 @@ export async function getAllBangladeshLocations(): Promise<string[]> {
   return locationList
 }
 
-/**
- * Get all locations as a simple list (just Upazila names)
- */
+
 export async function getSimpleBangladeshLocations(): Promise<string[]> {
   const locations = await loadBangladeshLocations()
   const locationList: string[] = []
@@ -85,9 +79,7 @@ export async function getSimpleBangladeshLocations(): Promise<string[]> {
   return locationList
 }
 
-/**
- * Get locations grouped by division
- */
+
 export async function getLocationsByDivision(): Promise<Record<string, string[]>> {
   const locations = await loadBangladeshLocations()
   const grouped: Record<string, string[]> = {}
@@ -104,9 +96,7 @@ export async function getLocationsByDivision(): Promise<Record<string, string[]>
   return grouped
 }
 
-/**
- * Get all unique districts (across all divisions)
- */
+
 export async function getAllDistricts(): Promise<string[]> {
   const locations = await loadBangladeshLocations()
   const districtsSet = new Set<string>()
@@ -120,9 +110,7 @@ export async function getAllDistricts(): Promise<string[]> {
   return Array.from(districtsSet).sort()
 }
 
-/**
- * Get all upazilas for a specific district
- */
+
 export async function getUpazilasByDistrict(districtName: string): Promise<Upazila[]> {
   const locations = await loadBangladeshLocations()
   const upazilas: Upazila[] = []
@@ -138,9 +126,7 @@ export async function getUpazilasByDistrict(districtName: string): Promise<Upazi
   return upazilas
 }
 
-/**
- * Get district info by name (returns division, district, and upazilas)
- */
+
 export async function getDistrictInfo(districtName: string): Promise<{
   division: string
   district: District
