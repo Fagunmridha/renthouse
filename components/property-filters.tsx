@@ -38,7 +38,6 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
   ])
   const [rooms, setRooms] = useState(searchParams.get("rooms") || "")
 
-  // Parse location from URL params
   useEffect(() => {
     const urlLocation = searchParams.get("location") || ""
     if (urlLocation) {
@@ -60,7 +59,6 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
     }
   }, [searchParams])
 
-  // Load districts on component mount
   useEffect(() => {
     const loadDistricts = async () => {
       try {
@@ -74,7 +72,6 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
     loadDistricts()
   }, [])
 
-  // Load upazilas when district is selected
   useEffect(() => {
     const loadUpazilas = async () => {
       if (!selectedDistrict || selectedDistrict === "all") {
@@ -87,7 +84,6 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
       try {
         const districtUpazilas = await getUpazilasByDistrict(selectedDistrict)
         setUpazilas(districtUpazilas)
-        // Keep selected upazila if it exists in the new list
         if (selectedUpazila && selectedUpazila !== "all" && !districtUpazilas.find((u) => u.name === selectedUpazila)) {
           setSelectedUpazila("all")
         }
@@ -99,7 +95,6 @@ export function PropertyFilters({ compact = false }: PropertyFiltersProps) {
     loadUpazilas()
   }, [selectedDistrict, selectedUpazila])
 
-  // Update location string when selections change
   useEffect(() => {
     if (selectedDistrict && selectedDistrict !== "all" && selectedUpazila && selectedUpazila !== "all") {
       setLocation(`${selectedDistrict}, ${selectedUpazila}`)

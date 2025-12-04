@@ -59,7 +59,6 @@ export default function HomePage() {
         const response = await fetch("/api/properties")
         if (response.ok) {
           const allProperties = await response.json()
-          // Filter featured, available, and approved properties
           const featured = allProperties.filter((p: Property) => p.featured && p.available && p.approved).slice(0, 6)
           setFeaturedProperties(featured)
         }

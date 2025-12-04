@@ -10,7 +10,7 @@ async function getStats() {
       prisma.property.count(),
       prisma.property.count({ where: { approved: false } }),
       prisma.property.count({ where: { approved: true } }),
-      prisma.property.count({ where: { approved: false } }), // We'll use this differently
+      prisma.property.count({ where: { approved: false } }),
     ])
 
     return {

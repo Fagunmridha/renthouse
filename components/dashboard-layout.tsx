@@ -27,7 +27,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const currentUser = getCurrentUser()
-    // Allow ADMIN and OWNER to access dashboard
     if (!currentUser || (currentUser.role !== "OWNER" && currentUser.role !== "ADMIN")) {
       router.push("/login")
     } else {

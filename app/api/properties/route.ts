@@ -2,12 +2,10 @@ import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import type { Property } from "@/lib/types"
 
-// GET all properties
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
   try {
-    // Build where clause for filters
     const where: any = {}
 
     const location = searchParams.get("location")
@@ -17,18 +15,13 @@ export async function GET(request: NextRequest) {
     const rooms = searchParams.get("rooms")
 
     if (location) {
-      // Handle location matching: if it contains comma, match exactly
-      // If only district, match properties starting with that district
       const trimmedLocation = decodeURIComponent(location).trim()
       if (trimmedLocation.includes(",")) {
-        // Exact match for "District, Upazila" format
-        // Also match if property location starts with this (for partial matches)
         where.OR = [
           { location: trimmedLocation },
           { location: { startsWith: trimmedLocation } },
         ]
       } else {
-        // Match properties that start with this district (for district-only search)
         where.location = {
           startsWith: trimmedLocation,
         }
@@ -46,11 +39,8 @@ export async function GET(request: NextRequest) {
       where.rooms = Number(rooms)
     }
 
-    // Check if admin is requesting (via query param or header)
     const isAdmin = searchParams.get("admin") === "true"
     
-    // Only show approved properties to regular users, admin can see all
-    // Note: Admin can also access via /admin/properties which fetches directly from Prisma
     if (!isAdmin) {
       where.approved = true
     }
@@ -60,21 +50,6 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: "desc" },
     })
 
-    // Debug logging (remove in production)
-    if (process.env.NODE_ENV === "development") {
-      console.log("API Query Filters:", JSON.stringify(where, null, 2))
-      console.log("Found properties:", dbProperties.length)
-      if (dbProperties.length > 0) {
-        console.log("Sample property:", {
-          id: dbProperties[0].id,
-          location: dbProperties[0].location,
-          approved: dbProperties[0].approved,
-          familyType: dbProperties[0].familyType,
-        })
-      }
-    }
-
-    // Convert Prisma model to Property type (parse images JSON string)
     const properties: Property[] = dbProperties.map((p) => ({
       id: p.id,
       title: p.title,
@@ -102,12 +77,10 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST new property
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    // Validate required fields
     if (!body.title || !body.description || !body.location || !body.familyType || !body.price || !body.rooms) {
       return NextResponse.json(
         { error: "Missing required fields: title, description, location, familyType, price, rooms" },
@@ -115,7 +88,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate price and rooms are numbers
     if (isNaN(Number(body.price)) || Number(body.price) <= 0) {
       return NextResponse.json({ error: "Price must be a positive number" }, { status: 400 })
     }
@@ -140,11 +112,10 @@ export async function POST(request: NextRequest) {
         ownerPhone: body.ownerPhone || "",
         available: body.available ?? true,
         featured: body.featured ?? false,
-        approved: false, // New properties need admin approval
+        approved: false,
       },
     })
 
-    // Convert to Property type
     const property: Property = {
       id: newProperty.id,
       title: newProperty.title,
@@ -170,7 +141,6 @@ export async function POST(request: NextRequest) {
     console.error("Error creating property:", error)
     const errorMessage = error instanceof Error ? error.message : "Failed to create property"
     
-    // Check for Prisma errors
     if (error instanceof Error && error.message.includes("Unique constraint")) {
       return NextResponse.json({ error: "A property with this information already exists" }, { status: 400 })
     }

@@ -28,16 +28,6 @@ export function MapWithLocationExample() {
           setSelectedLocation(location)
           console.log("Location changed:", location)
         }}
-        // Optional: Provide initial location
-        // initialLocation={{
-        //   division: "Dhaka",
-        //   district: "Dhaka",
-        //   upazila: "Gulshan",
-        //   lat: 23.7925,
-        //   lng: 90.4078,
-        // }}
-        // Optional: Provide custom JSON URL
-        // jsonUrl="https://your-custom-url.com/bangladesh-locations.json"
       />
 
       {selectedLocation && (

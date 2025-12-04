@@ -6,12 +6,8 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // Get user from request headers (sent from client)
     const authHeader = request.headers.get("x-user-email")
     const userEmail = authHeader || request.headers.get("authorization")?.replace("Bearer ", "")
-    
-    // For now, we'll allow the request. In production, use proper JWT/session auth
-    // Admin check should be done via proper authentication middleware
     
     const { id } = await params
 
@@ -23,8 +19,6 @@ export async function POST(
       return NextResponse.json({ error: "Property not found" }, { status: 404 })
     }
 
-    // For rejection, we can either delete or keep it as rejected
-    // For now, we'll delete it. You can change this to set a status field if needed
     await prisma.property.delete({
       where: { id },
     })

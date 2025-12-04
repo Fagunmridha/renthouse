@@ -6,12 +6,8 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // Get user from request headers (sent from client)
     const authHeader = request.headers.get("x-user-email")
     const userEmail = authHeader || request.headers.get("authorization")?.replace("Bearer ", "")
-    
-    // For now, we'll allow the request. In production, use proper JWT/session auth
-    // Admin check should be done via proper authentication middleware
     
     const { id } = await params
 

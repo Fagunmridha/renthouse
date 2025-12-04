@@ -52,7 +52,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
   const [images, setImages] = useState<string[]>(property?.images || [])
   const [newImageUrl, setNewImageUrl] = useState("")
 
-  // Parse existing location if editing (format: "District, Upazila" or "District, Upazila, Area")
   useEffect(() => {
     if (property?.location) {
       const parts = property.location.split(", ").map((p) => p.trim())
@@ -66,7 +65,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
     }
   }, [property])
 
-  // Load districts on component mount
   useEffect(() => {
     const loadDistricts = async () => {
       try {
@@ -87,7 +85,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
     loadDistricts()
   }, [toast])
 
-  // Load upazilas when district is selected
   useEffect(() => {
     const loadUpazilas = async () => {
       if (!selectedDistrict) {
@@ -110,7 +107,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
     loadUpazilas()
   }, [selectedDistrict])
 
-  // Update location field when selections change
   useEffect(() => {
     if (selectedDistrict && selectedUpazila) {
       let locationString = `${selectedDistrict}, ${selectedUpazila}`
@@ -149,7 +145,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
     e.preventDefault()
     setLoading(true)
 
-    // Validate location fields
     if (!selectedDistrict || !selectedUpazila) {
       toast({
         title: "Error",
@@ -173,7 +168,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
 
     try {
       if (isEditing && property) {
-        // Update existing property
         const updatedProperty: Property = {
           ...property,
           title: formData.title,
@@ -207,7 +201,6 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
           throw new Error(errorData.error || "Failed to update property")
         }
       } else {
-        // Create new property
         const newProperty: Property = {
           id: `prop-${Date.now()}`,
           title: formData.title,

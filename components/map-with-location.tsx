@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2 } from "lucide-react"
 
-// Type definitions for Bangladesh locations
 interface Upazila {
   name: string
   lat: number
@@ -47,7 +46,6 @@ interface MapWithLocationProps {
   jsonUrl?: string
 }
 
-// Default center: Dhaka, Bangladesh
 const DEFAULT_CENTER = {
   lat: 23.8103,
   lng: 90.4125,
@@ -80,13 +78,11 @@ export function MapWithLocation({
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
   const mapRef = useRef<GoogleMap | null>(null)
 
-  // Load Bangladesh locations JSON
   useEffect(() => {
     const loadLocations = async () => {
       try {
         let data: BangladeshLocations
 
-        // Try to fetch local JSON first (from public folder or data folder)
         try {
           const response = await fetch("/data/bangladesh-locations.json")
           if (!response.ok) {
@@ -94,7 +90,6 @@ export function MapWithLocation({
           }
           data = await response.json()
         } catch {
-          // If local fetch fails, try from provided URL or default URL
           const url = jsonUrl || "https://gist.githubusercontent.com/yourusername/abcdef123/raw/bangladesh-locations.json"
           const response = await fetch(url)
           if (!response.ok) {
@@ -105,7 +100,6 @@ export function MapWithLocation({
 
         setLocations(data)
 
-        // Set initial values if provided
         if (initialLocation) {
           if (initialLocation.division) {
             setSelectedDivision(initialLocation.division)
@@ -119,7 +113,6 @@ export function MapWithLocation({
         }
       } catch (error) {
         console.error("Error loading locations:", error)
-        // Set empty locations structure to prevent errors
         setLocations({ divisions: [] })
       } finally {
         setLoading(false)
@@ -129,7 +122,6 @@ export function MapWithLocation({
     loadLocations()
   }, [jsonUrl, initialLocation])
 
-  // Update marker position when dropdown selection changes
   useEffect(() => {
     if (!locations || !selectedDivision || !selectedDistrict || !selectedUpazila) {
       return
@@ -152,7 +144,6 @@ export function MapWithLocation({
     setMarkerPosition(newPosition)
     setMapCenter(newPosition)
 
-    // Notify parent component
     if (onLocationChange) {
       onLocationChange({
         division: selectedDivision,
@@ -164,7 +155,6 @@ export function MapWithLocation({
     }
   }, [selectedDivision, selectedDistrict, selectedUpazila, locations, onLocationChange])
 
-  // Handle marker drag
   const handleMarkerDragEnd = useCallback(
     (e: google.maps.MapMouseEvent) => {
       if (e.latLng) {
@@ -175,7 +165,6 @@ export function MapWithLocation({
         setMarkerPosition(newPosition)
         setMapCenter(newPosition)
 
-        // Notify parent component
         if (onLocationChange) {
           onLocationChange({
             division: selectedDivision || "",
@@ -190,7 +179,6 @@ export function MapWithLocation({
     [selectedDivision, selectedDistrict, selectedUpazila, onLocationChange]
   )
 
-  // Handle map click
   const handleMapClick = useCallback(
     (e: google.maps.MapMouseEvent) => {
       if (e.latLng) {
@@ -200,7 +188,6 @@ export function MapWithLocation({
         }
         setMarkerPosition(newPosition)
 
-        // Notify parent component
         if (onLocationChange) {
           onLocationChange({
             division: selectedDivision || "",
@@ -215,7 +202,6 @@ export function MapWithLocation({
     [selectedDivision, selectedDistrict, selectedUpazila, onLocationChange]
   )
 
-  // Handle Places Autocomplete selection
   const handlePlaceSelect = useCallback(() => {
     if (autocompleteRef.current) {
       const place = autocompleteRef.current.getPlace()
@@ -227,7 +213,6 @@ export function MapWithLocation({
         setMarkerPosition(newPosition)
         setMapCenter(newPosition)
 
-        // Notify parent component
         if (onLocationChange) {
           onLocationChange({
             division: selectedDivision || "",
@@ -241,12 +226,10 @@ export function MapWithLocation({
     }
   }, [selectedDivision, selectedDistrict, selectedUpazila, onLocationChange])
 
-  // Get available districts for selected division
   const availableDistricts = selectedDivision
     ? locations?.divisions.find((d) => d.name === selectedDivision)?.districts || []
     : []
 
-  // Get available upazilas for selected district
   const availableUpazilas = selectedDistrict && selectedDivision
     ? locations?.divisions
         .find((d) => d.name === selectedDivision)
@@ -359,7 +342,6 @@ export function MapWithLocation({
             <Autocomplete
               onLoad={(autocomplete) => {
                 autocompleteRef.current = autocomplete
-                // Restrict to Bangladesh
                 autocomplete.setComponentRestrictions({ country: "bd" })
                 autocomplete.setFields(["geometry", "name", "formatted_address"])
               }}

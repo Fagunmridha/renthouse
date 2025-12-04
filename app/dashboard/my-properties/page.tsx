@@ -37,13 +37,12 @@ export default function MyPropertiesPage() {
     if (user) {
       const fetchProperties = async () => {
         try {
-          // Admin can see all properties, owner sees only their own
           const response = await fetch(user.role === "ADMIN" ? "/api/properties?admin=true" : "/api/properties")
           if (response.ok) {
             const allProperties = await response.json()
             const userProperties = user.role === "ADMIN" 
-              ? allProperties // Admin sees all
-              : allProperties.filter((p: Property) => p.ownerId === user.id) // Owner sees only their own
+              ? allProperties
+              : allProperties.filter((p: Property) => p.ownerId === user.id)
             setProperties(userProperties)
           }
         } catch (error) {

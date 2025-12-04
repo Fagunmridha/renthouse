@@ -18,7 +18,6 @@ function PropertiesContent() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        // Build query string from search params
         const params = new URLSearchParams()
         const location = searchParams.get("location")
         const familyType = searchParams.get("familyType")
@@ -38,18 +37,6 @@ function PropertiesContent() {
         const response = await fetch(url)
         if (response.ok) {
           const data = await response.json()
-          console.log("Properties API Response:", {
-            url,
-            count: data.length,
-            properties: data.map((p: Property) => ({
-              id: p.id,
-              title: p.title,
-              location: p.location,
-              familyType: p.familyType,
-              approved: p.approved,
-              available: p.available,
-            })),
-          })
           setProperties(data)
         } else {
           console.error("Failed to fetch properties")
@@ -65,7 +52,6 @@ function PropertiesContent() {
   }, [searchParams])
 
   useEffect(() => {
-    // Since API already filters, just filter by available status
     const result = properties.filter((p) => p.available)
     setFilteredProperties(result)
   }, [properties])
@@ -82,19 +68,16 @@ function PropertiesContent() {
           </div>
 
           <div className="flex flex-col md:flex-row gap-8">
-         
             <div className="md:hidden">
               <PropertyFilters compact />
             </div>
 
-         
             <aside className="hidden md:block w-72 shrink-0">
               <div className="sticky top-24">
                 <PropertyFilters />
               </div>
             </aside>
 
-          
             <div className="flex-1">
               {loading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

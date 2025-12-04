@@ -17,16 +17,14 @@ export default function DashboardPage() {
   useEffect(() => {
     const user = getCurrentUser()
     if (user) {
-      // Fetch properties from API
       const fetchProperties = async () => {
         try {
-          // Admin can see all properties, owner sees only their own
           const response = await fetch(user.role === "ADMIN" ? "/api/properties?admin=true" : "/api/properties")
           if (response.ok) {
             const allProperties = await response.json()
             const userProperties = user.role === "ADMIN" 
-              ? allProperties // Admin sees all
-              : allProperties.filter((p: Property) => p.ownerId === user.id) // Owner sees only their own
+              ? allProperties
+              : allProperties.filter((p: Property) => p.ownerId === user.id)
             setProperties(userProperties)
           }
         } catch (error) {
@@ -36,7 +34,6 @@ export default function DashboardPage() {
 
       fetchProperties()
 
-      // Messages still use localStorage for now
       const allMessages = getStoredMessages()
       const userMessages = allMessages.filter((m) => m.ownerId === user.id)
       setMessages(userMessages)

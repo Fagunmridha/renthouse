@@ -229,7 +229,6 @@ export const mockMessages: Message[] = [
   },
 ]
 
-// Storage helpers for simulating database
 export function getStoredProperties(): Property[] {
   if (typeof window === "undefined") return mockProperties
   const stored = localStorage.getItem("rent-house-properties")
@@ -247,14 +246,12 @@ export function getStoredUsers(): User[] {
   const stored = localStorage.getItem("rent-house-users")
   const users = stored ? JSON.parse(stored) : mockUsers
   
-  // Always ensure admin user exists
   const adminUser = mockUsers.find(u => u.email === "fagunandy@gmail.com")
   if (adminUser) {
     const adminExists = users.find((u: User) => u.email === "fagunandy@gmail.com")
     if (!adminExists) {
-      users.unshift(adminUser) // Add admin at the beginning
+      users.unshift(adminUser)
     } else {
-      // Update admin user if exists
       const adminIndex = users.findIndex((u: User) => u.email === "fagunandy@gmail.com")
       if (adminIndex !== -1) {
         users[adminIndex] = adminUser
@@ -299,7 +296,6 @@ export function setCurrentUser(user: User | null) {
   }
 }
 
-// Favorites helpers
 export function getFavorites(): string[] {
   if (typeof window === "undefined") return []
   const stored = localStorage.getItem("rent-house-favorites")

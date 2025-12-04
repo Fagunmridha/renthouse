@@ -25,7 +25,6 @@ export function HeroSearch() {
   const [familyType, setFamilyType] = useState("all")
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000])
 
-  // Load districts on component mount
   useEffect(() => {
     const loadDistricts = async () => {
       try {
@@ -39,7 +38,6 @@ export function HeroSearch() {
     loadDistricts()
   }, [])
 
-  // Load upazilas when district is selected
   useEffect(() => {
     const loadUpazilas = async () => {
       if (!selectedDistrict || selectedDistrict === "all") {
@@ -62,7 +60,6 @@ export function HeroSearch() {
     loadUpazilas()
   }, [selectedDistrict])
 
-  // Update location string when selections change
   useEffect(() => {
     if (selectedDistrict && selectedDistrict !== "all" && selectedUpazila && selectedUpazila !== "all") {
       setLocation(`${selectedDistrict}, ${selectedUpazila}`)

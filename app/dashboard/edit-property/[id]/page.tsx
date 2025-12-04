@@ -25,7 +25,6 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
     const properties = getStoredProperties()
     const found = properties.find((p) => p.id === id)
 
-    // Admin can edit any property, owner can only edit their own
     if (!found || (user.role !== "ADMIN" && found.ownerId !== user.id)) {
       router.push("/dashboard/my-properties")
       return

@@ -2,7 +2,6 @@ import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import type { Property } from "@/lib/types"
 
-// GET single property
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
@@ -14,7 +13,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: "Property not found" }, { status: 404 })
     }
 
-    // Convert to Property type
     const property: Property = {
       id: dbProperty.id,
       title: dbProperty.title,
@@ -42,7 +40,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
 }
 
-// PUT update property
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
@@ -64,7 +61,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       },
     })
 
-    // Convert to Property type
     const property: Property = {
       id: updatedProperty.id,
       title: updatedProperty.title,
@@ -95,7 +91,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
   }
 }
 
-// DELETE property
 export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params

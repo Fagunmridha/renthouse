@@ -1,4 +1,3 @@
-// Utility functions for Bangladesh locations
 
 interface Upazila {
   name: string
@@ -20,7 +19,6 @@ interface BangladeshLocations {
   divisions: Division[]
 }
 
-// Cache for loaded locations
 let cachedLocations: BangladeshLocations | null = null
 let cachedLocationList: string[] | null = null
 
@@ -42,7 +40,6 @@ export async function loadBangladeshLocations(): Promise<BangladeshLocations> {
     return data
   } catch (error) {
     console.error("Error loading Bangladesh locations:", error)
-    // Return empty structure if fetch fails
     return { divisions: [] }
   }
 }

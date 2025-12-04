@@ -16,11 +16,9 @@ export default function FavoritesPage() {
   useEffect(() => {
     const loadFavorites = async () => {
       try {
-        // Fetch all properties from API
         const response = await fetch("/api/properties")
         if (response.ok) {
           const allProperties = await response.json()
-          // Filter by favorite IDs
           const favoriteIds = getFavorites()
           const favorites = allProperties.filter((p: Property) => favoriteIds.includes(p.id))
           setFavoriteProperties(favorites)
