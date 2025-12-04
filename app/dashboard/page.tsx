@@ -77,13 +77,13 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-8">
-        <div className="flex items-center justify-between">
+      <div className="space-y-6 sm:space-y-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back! Here's an overview of your properties.</p>
+            <h1 className="text-2xl sm:text-3xl font-bold">Dashboard</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">Welcome back! Here's an overview of your properties.</p>
           </div>
-          <Button asChild>
+          <Button asChild className="w-full sm:w-auto">
             <Link href="/dashboard/add-property">
               <Plus className="h-4 w-4 mr-2" />
               Add Property
@@ -113,9 +113,9 @@ export default function DashboardPage() {
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold">Recent Properties</h2>
-            <Button variant="outline" asChild>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+            <h2 className="text-lg sm:text-xl font-semibold">Recent Properties</h2>
+            <Button variant="outline" asChild className="w-full sm:w-auto">
               <Link href="/dashboard/my-properties">View All</Link>
             </Button>
           </div>

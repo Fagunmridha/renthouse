@@ -81,9 +81,9 @@ export function HeroSearch() {
   }
 
   return (
-    <div className="bg-card rounded-2xl border shadow-lg p-6 md:p-8 w-full max-w-5xl mx-auto">
-      <h2 className="text-lg font-semibold mb-6">Find your perfect rental</h2>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+    <div className="bg-card rounded-2xl border shadow-lg p-4 sm:p-6 md:p-8 w-full max-w-5xl mx-auto">
+      <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Find your perfect rental</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-muted-foreground">District</label>
           <Select
@@ -159,7 +159,7 @@ export function HeroSearch() {
           />
         </div>
 
-        <div className="flex items-end">
+        <div className="flex items-end sm:col-span-2 lg:col-span-1">
           <Button onClick={handleSearch} className="w-full" size="lg">
             <Search className="h-4 w-4 mr-2" />
             Search

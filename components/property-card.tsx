@@ -82,35 +82,35 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </div>
         )}
       </div>
-      <CardContent className="p-4">
+      <CardContent className="p-3 sm:p-4">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="font-semibold text-lg line-clamp-1 text-balance">{property.title}</h3>
+          <h3 className="font-semibold text-base sm:text-lg line-clamp-1 text-balance">{property.title}</h3>
         </div>
-        <div className="flex items-center gap-1 text-muted-foreground mb-3">
-          <MapPin className="h-4 w-4 shrink-0" />
-          <span className="text-sm">{property.location}</span>
+        <div className="flex items-center gap-1 text-muted-foreground mb-2 sm:mb-3">
+          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
+          <span className="text-xs sm:text-sm line-clamp-1">{property.location}</span>
         </div>
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{property.description}</p>
-        <div className="flex items-center gap-4 text-sm">
+        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 mb-3 sm:mb-4">{property.description}</p>
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm">
           <div className="flex items-center gap-1">
-            <Bed className="h-4 w-4 text-muted-foreground" />
+            <Bed className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
             <span>
               {property.rooms} {property.rooms === 1 ? "Room" : "Rooms"}
             </span>
           </div>
           <div className="flex items-center gap-1">
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
             <span>{familyTypeLabels[property.familyType]}</span>
           </div>
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0 flex items-center justify-between">
+      <CardFooter className="p-3 sm:p-4 pt-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <div className="flex items-center gap-1">
-          <DollarSign className="h-5 w-5 text-accent" />
-          <span className="text-xl font-bold">{property.price.toLocaleString()}</span>
-          <span className="text-sm text-muted-foreground">/month</span>
+          <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+          <span className="text-lg sm:text-xl font-bold">{property.price.toLocaleString()}</span>
+          <span className="text-xs sm:text-sm text-muted-foreground">/month</span>
         </div>
-        <Button asChild size="sm">
+        <Button asChild size="sm" className="w-full sm:w-auto">
           <Link href={`/property/${property.id}`}>View Details</Link>
         </Button>
       </CardFooter>

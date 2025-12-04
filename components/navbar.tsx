@@ -44,10 +44,10 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <Home className="h-6 w-6 text-accent" />
-          <span className="text-xl font-semibold">RentHouse</span>
+      <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
+        <Link href="/" className="flex items-center gap-1.5 sm:gap-2">
+          <Home className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
+          <span className="text-lg sm:text-xl font-semibold">RentHouse</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -156,14 +156,14 @@ export function Navbar() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px]">
-              <div className="flex flex-col gap-4 mt-8">
+            <SheetContent side="right" className="w-[280px] sm:w-[320px]">
+              <div className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={`text-lg font-medium transition-colors hover:text-accent ${
+                    className={`text-base sm:text-lg font-medium transition-colors hover:text-accent ${
                       pathname === link.href ? "text-accent" : "text-foreground"
                     }`}
                   >

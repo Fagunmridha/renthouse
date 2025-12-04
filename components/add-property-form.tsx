@@ -254,8 +254,8 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div className="space-y-2">
           <Label htmlFor="title">Property Title</Label>
           <Input
@@ -281,10 +281,10 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
         </div>
       </div>
 
-      {/* Location Fields - Grouped together */}
-      <div className="space-y-4">
-        <Label className="text-base font-semibold">Location</Label>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    
+      <div className="space-y-3 sm:space-y-4">
+        <Label className="text-sm sm:text-base font-semibold">Location</Label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <div className="space-y-2">
             <Label htmlFor="district">District *</Label>
             <Select
@@ -440,12 +440,12 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
 
       <div className="space-y-4">
         <Label>Property Images</Label>
-        <div className="flex gap-2">
-          <Input placeholder="Enter image URL" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} />
-          <Button type="button" variant="outline" onClick={addImageUrl}>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Input placeholder="Enter image URL" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} className="flex-1" />
+          <Button type="button" variant="outline" onClick={addImageUrl} className="w-full sm:w-auto">
             <Plus className="h-4 w-4" />
           </Button>
-          <Button type="button" variant="secondary" onClick={addPlaceholderImage}>
+          <Button type="button" variant="secondary" onClick={addPlaceholderImage} className="w-full sm:w-auto">
             <Upload className="h-4 w-4 mr-2" />
             Add Placeholder
           </Button>
@@ -474,8 +474,8 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
         )}
       </div>
 
-      <div className="flex gap-4">
-        <Button type="submit" disabled={loading}>
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <Button type="submit" disabled={loading} className="w-full sm:w-auto">
           {loading ? (
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -485,7 +485,7 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
             <>{isEditing ? "Update Property" : "Add Property"}</>
           )}
         </Button>
-        <Button type="button" variant="outline" onClick={() => router.back()}>
+        <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
           Cancel
         </Button>
       </div>

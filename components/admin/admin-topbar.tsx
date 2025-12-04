@@ -21,7 +21,7 @@ export function AdminTopbar() {
   if (!user) return null
 
   return (
-    <div className="h-16 border-b bg-card flex items-center justify-between px-6">
+    <div className="hidden md:flex h-16 border-b bg-card items-center justify-between px-6">
       <div>
         <h2 className="text-lg font-semibold">Admin Panel</h2>
       </div>

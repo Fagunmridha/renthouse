@@ -7,18 +7,18 @@ export function Footer() {
     
       <div className="absolute inset-0 bg-gradient-to-r from-accent/8 via-transparent to-accent/5 pointer-events-none" />
       
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-accent to-accent/80 group-hover:from-accent/90 group-hover:to-accent transition-all duration-300 shadow-md shadow-accent/20 group-hover:shadow-lg group-hover:shadow-accent/30 group-hover:scale-110">
-                <Home className="h-6 w-6 text-accent-foreground" />
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
+              <div className="p-1.5 sm:p-2 rounded-xl bg-gradient-to-br from-accent to-accent/80 group-hover:from-accent/90 group-hover:to-accent transition-all duration-300 shadow-md shadow-accent/20 group-hover:shadow-lg group-hover:shadow-accent/30 group-hover:scale-110">
+                <Home className="h-5 w-5 sm:h-6 sm:w-6 text-accent-foreground" />
               </div>
-              <span className="text-2xl font-bold text-foreground">
+              <span className="text-xl sm:text-2xl font-bold text-foreground">
                 RentHouse
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-xs">
               Find your perfect home with RentHouse. Browse thousands of verified properties and connect directly with trusted owners.
             </p>
             
@@ -56,7 +56,7 @@ export function Footer() {
 
          
           <div>
-            <h3 className="font-bold text-lg mb-6 text-foreground">Quick Links</h3>
+            <h3 className="font-bold text-base sm:text-lg mb-4 sm:mb-6 text-foreground">Quick Links</h3>
             <ul className="space-y-3">
               <li>
                 <Link 
@@ -173,12 +173,12 @@ export function Footer() {
         </div>
 
       
-        <div className="border-t border-border/60 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground text-center md:text-left">
+        <div className="border-t border-border/60 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+            <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
               © {new Date().getFullYear()} RentHouse. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
               <Link href="/privacy" className="hover:text-accent transition-colors duration-300">
                 Privacy Policy
               </Link>

@@ -78,7 +78,7 @@ export default function HomePage() {
 
       <main className="flex-1">
        
-        <section className="relative py-16 md:py-28 lg:py-32 overflow-hidden min-h-[600px] md:min-h-[700px] flex items-center">
+        <section className="relative py-12 sm:py-16 md:py-28 lg:py-32 overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[700px] flex items-center">
          
           <div className="absolute inset-0 z-0">
             <Image
@@ -102,21 +102,18 @@ export default function HomePage() {
           </div>
 
       
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-12 max-w-4xl mx-auto">
-             
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 hero-fade-in-delay-1">
-                <TrendingUp className="h-4 w-4 animate-bounce [animation-duration:2s]" />
-                <span>Trusted by thousands of renters</span>
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="text-center mb-8 sm:mb-12 max-w-4xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-4 sm:mb-6 hero-fade-in-delay-1">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 animate-bounce [animation-duration:2s]" />
+                <span className="whitespace-nowrap">Trusted by thousands of renters</span>
               </div>
 
-             
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent hero-fade-in-delay-3">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-balance bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent hero-fade-in-delay-3 px-2">
                 Find Your Perfect Home
               </h1>
 
-             
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed mb-8 hero-fade-in-delay-5">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed mb-6 sm:mb-8 hero-fade-in-delay-5 px-2">
                 Discover thousands of verified rental properties. From cozy studios to spacious family homes, 
                 find the perfect place that fits your lifestyle and budget.
               </p>
@@ -137,9 +134,9 @@ export default function HomePage() {
         </section>
 
       
-        <section className="py-12 md:py-16 border-y bg-card/50">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="py-8 sm:py-12 md:py-16 border-y bg-card/50">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
               {stats.map((stat, index) => {
                 const revealClass = 
                   index === 0 ? 'stat-reveal-0' :
@@ -151,10 +148,10 @@ export default function HomePage() {
                     key={index} 
                     className={`text-center stat-modern ${revealClass}`}
                   >
-                    <div className="stat-value text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_200%]">
+                    <div className="stat-value text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_200%]">
                       {stat.value}
                     </div>
-                    <div className="stat-label text-sm md:text-base text-muted-foreground transition-all duration-300">{stat.label}</div>
+                    <div className="stat-label text-xs sm:text-sm md:text-base text-muted-foreground transition-all duration-300">{stat.label}</div>
                   </div>
                 )
               })}
@@ -163,15 +160,15 @@ export default function HomePage() {
         </section>
 
         
-        <section className="py-20 md:py-28">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose RentHouse?</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-28">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8 sm:mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">Why Choose RentHouse?</h2>
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
                 Everything you need to find your next home, all in one place
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {features.map((feature, index) => {
                 const Icon = feature.icon
                 return (
@@ -179,11 +176,11 @@ export default function HomePage() {
                     key={index}
                     className="group relative p-6 rounded-2xl bg-card border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                   >
-                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${feature.bgColor} ${feature.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="h-7 w-7" />
+                    <div className={`inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${feature.bgColor} ${feature.color} mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{feature.title}</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
                   </div>
                 )
               })}
@@ -192,14 +189,14 @@ export default function HomePage() {
         </section>
 
        
-        <section className="py-20 md:py-28 bg-gradient-to-b from-secondary/20 via-background to-background">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gradient-to-b from-secondary/20 via-background to-background">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-12 gap-4">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-2">Featured Properties</h2>
-                <p className="text-lg text-muted-foreground">Handpicked selections just for you</p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2">Featured Properties</h2>
+                <p className="text-sm sm:text-base md:text-lg text-muted-foreground">Handpicked selections just for you</p>
               </div>
-              <Button variant="outline" size="lg" asChild className="group">
+              <Button variant="outline" size="default" className="group w-full sm:w-auto" asChild>
                 <Link href="/properties">
                   View All Properties
                   <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -236,35 +233,34 @@ export default function HomePage() {
         </section>
 
        
-        <section className="py-20 md:py-28">
-          <div className="container mx-auto px-4">
-            <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground rounded-3xl p-8 md:p-16 text-center shadow-2xl">
-             
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+        <section className="py-12 sm:py-16 md:py-20 lg:py-28">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-16 text-center shadow-2xl">
+              <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-white/5 rounded-full blur-3xl" />
               
               <div className="relative z-10 max-w-3xl mx-auto">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-foreground/20 mb-6">
-                  <Home className="h-8 w-8" />
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-primary-foreground/20 mb-4 sm:mb-6">
+                  <Home className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-balance px-2">
                   Ready to List Your Property?
                 </h2>
-                <p className="text-xl mb-10 opacity-95 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 opacity-95 max-w-2xl mx-auto leading-relaxed px-2">
                   Join thousands of homeowners who trust RentHouse to find great tenants. 
                   List your property today and start receiving inquiries in minutes.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" variant="secondary" className="bg-background text-foreground hover:bg-background/90 shadow-lg" asChild>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                  <Button size="default" variant="secondary" className="bg-background text-foreground hover:bg-background/90 shadow-lg w-full sm:w-auto" asChild>
                     <Link href="/dashboard">
-                      <Home className="h-5 w-5 mr-2" />
+                      <Home className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                       List Your Property
                     </Link>
                   </Button>
                   <Button
-                    size="lg"
+                    size="default"
                     variant="outline"
-                    className="bg-transparent border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50 backdrop-blur-sm"
+                    className="bg-transparent border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50 backdrop-blur-sm w-full sm:w-auto"
                     asChild
                   >
                     <Link href="/properties">
@@ -274,8 +270,7 @@ export default function HomePage() {
                   </Button>
                 </div>
                 
-               
-                <div className="mt-12 pt-8 border-t border-primary-foreground/20 flex flex-wrap items-center justify-center gap-6 text-sm opacity-90">
+                <div className="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-primary-foreground/20 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm opacity-90">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-5 w-5" />
                     <span>Free to list</span>

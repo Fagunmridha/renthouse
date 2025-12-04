@@ -60,11 +60,11 @@ function PropertiesContent() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-1 py-8">
-        <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Browse Properties</h1>
-            <p className="text-muted-foreground">{filteredProperties.length} properties available</p>
+      <main className="flex-1 py-6 sm:py-8">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">Browse Properties</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">{filteredProperties.length} properties available</p>
           </div>
 
           <div className="flex flex-col md:flex-row gap-8">

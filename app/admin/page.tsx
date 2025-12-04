@@ -32,21 +32,21 @@ export default async function AdminDashboardPage() {
   const stats = await getStats()
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Manage properties and platform</p>
+        <h1 className="text-2xl sm:text-3xl font-bold">Admin Dashboard</h1>
+        <p className="text-sm sm:text-base text-muted-foreground">Manage properties and platform</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Total Properties</p>
-                <p className="text-3xl font-bold">{stats.totalProperties}</p>
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Total Properties</p>
+                <p className="text-2xl sm:text-3xl font-bold">{stats.totalProperties}</p>
               </div>
-              <Building2 className="h-8 w-8 text-muted-foreground" />
+              <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>
@@ -79,15 +79,15 @@ export default async function AdminDashboardPage() {
 
       {stats.pendingProperties > 0 && (
         <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
+          <CardContent className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Action Required</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Action Required</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   You have {stats.pendingProperties} {stats.pendingProperties === 1 ? "property" : "properties"} waiting for approval.
                 </p>
               </div>
-              <Button asChild>
+              <Button asChild className="w-full sm:w-auto">
                 <Link href="/admin/properties">
                   Review Properties
                 </Link>
