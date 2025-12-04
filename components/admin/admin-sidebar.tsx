@@ -36,12 +36,16 @@ export function AdminSidebar({ onLinkClick }: AdminSidebarProps) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-card border-r">
-      <div className="p-4 sm:p-6 border-b">
-        <Link href="/" className="flex items-center gap-2" onClick={handleLinkClick}>
-          <Home className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
-          <span className="text-lg sm:text-xl font-bold">RentHouse</span>
-          <span className="text-xs sm:text-sm text-muted-foreground ml-2">Admin</span>
+    <div className="flex flex-col h-full bg-gradient-to-b from-card via-card to-card/95 border-r shadow-sm">
+      <div className="p-4 sm:p-6 border-b bg-gradient-to-r from-accent/5 via-transparent to-transparent">
+        <Link href="/" className="flex items-center gap-2 group" onClick={handleLinkClick}>
+          <div className="p-2 rounded-lg bg-gradient-to-br from-accent to-accent/80 group-hover:from-accent/90 group-hover:to-accent transition-all shadow-md shadow-accent/20 group-hover:shadow-lg group-hover:shadow-accent/30">
+            <Home className="h-4 w-4 sm:h-5 sm:w-5 text-accent-foreground" />
+          </div>
+          <div>
+            <span className="text-lg sm:text-xl font-bold block">RentHouse</span>
+            <span className="text-xs text-muted-foreground">Admin Panel</span>
+          </div>
         </Link>
       </div>
 
@@ -55,22 +59,32 @@ export function AdminSidebar({ onLinkClick }: AdminSidebarProps) {
               href={link.href}
               onClick={handleLinkClick}
               className={cn(
-                "flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base",
+                "flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-all duration-200 text-sm sm:text-base group relative",
                 isActive
-                  ? "bg-accent text-accent-foreground font-medium"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-gradient-to-r from-accent to-accent/90 text-accent-foreground font-medium shadow-sm"
+                  : "text-muted-foreground hover:bg-muted/80 hover:text-foreground hover:translate-x-1"
               )}
             >
-              <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-              {link.label}
+              <Icon className={cn(
+                "h-4 w-4 sm:h-5 sm:w-5 transition-transform",
+                isActive ? "scale-110" : "group-hover:scale-110"
+              )} />
+              <span>{link.label}</span>
+              {isActive && (
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent-foreground/50" />
+              )}
             </Link>
           )
         })}
       </nav>
 
-      <div className="p-3 sm:p-4 border-t">
-        <Button variant="ghost" className="w-full justify-start text-sm sm:text-base" onClick={handleLogout}>
-          <LogOut className="h-4 w-4 mr-2" />
+      <div className="p-3 sm:p-4 border-t bg-gradient-to-r from-muted/30 via-transparent to-transparent">
+        <Button 
+          variant="ghost" 
+          className="w-full justify-start text-sm sm:text-base hover:bg-destructive/10 hover:text-destructive transition-colors group" 
+          onClick={handleLogout}
+        >
+          <LogOut className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
           Logout
         </Button>
       </div>
