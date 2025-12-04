@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Building2, Eye, CheckCircle, XCircle } from "lucide-react"
+import { Building2, Eye, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { PropertyActions } from "@/components/admin/property-actions"
 import type { Property } from "@/lib/types"
@@ -52,7 +52,7 @@ export default async function AdminPropertiesPage() {
         <p className="text-muted-foreground">Approve or reject property listings</p>
       </div>
 
-      {/* Pending Properties */}
+     
       {pendingProperties.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -102,7 +102,7 @@ export default async function AdminPropertiesPage() {
         </div>
       )}
 
-      {/* Approved Properties */}
+     
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <h2 className="text-2xl font-semibold">Approved Properties ({approvedProperties.length})</h2>

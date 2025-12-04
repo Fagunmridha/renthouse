@@ -1,12 +1,12 @@
 import { prisma } from "@/lib/prisma"
 import { Card, CardContent } from "@/components/ui/card"
-import { Building2, CheckCircle, XCircle, Clock } from "lucide-react"
+import { Building2, CheckCircle, Clock } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 async function getStats() {
   try {
-    const [totalProperties, pendingProperties, approvedProperties, rejectedProperties] = await Promise.all([
+    const [totalProperties, pendingProperties, approvedProperties] = await Promise.all([
       prisma.property.count(),
       prisma.property.count({ where: { approved: false } }),
       prisma.property.count({ where: { approved: true } }),

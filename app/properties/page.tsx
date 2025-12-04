@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 import { PropertyGrid } from "@/components/property-grid"
 import { PropertyFilters } from "@/components/property-filters"
 import { Skeleton } from "@/components/ui/skeleton"
-import type { Property, FamilyType } from "@/lib/types"
+import type { Property } from "@/lib/types"
 
 function PropertiesContent() {
   const searchParams = useSearchParams()

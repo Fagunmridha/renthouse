@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { PropertyActions } from "@/components/admin/property-actions"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, MapPin, User, Phone, Mail, DollarSign, Calendar } from "lucide-react"
+import { ArrowLeft, MapPin, User, Phone, Mail, DollarSign } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import type { Property } from "@/lib/types"
@@ -71,9 +71,9 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Content */}
+       
         <div className="lg:col-span-2 space-y-6">
-          {/* Images */}
+         
           {property.images.length > 0 ? (
             <Card>
               <CardHeader>
@@ -102,7 +102,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             </Card>
           )}
 
-          {/* Description */}
+        
           <Card>
             <CardHeader>
               <CardTitle>Description</CardTitle>
@@ -112,7 +112,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             </CardContent>
           </Card>
 
-          {/* Terms */}
+         
           {property.terms && (
             <Card>
               <CardHeader>
@@ -125,9 +125,9 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
           )}
         </div>
 
-        {/* Sidebar */}
+       
         <div className="space-y-6">
-          {/* Status & Info */}
+        
           <Card>
             <CardHeader>
               <CardTitle>Property Information</CardTitle>
@@ -164,7 +164,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             </CardContent>
           </Card>
 
-          {/* Owner Information */}
+      
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -194,7 +194,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             </CardContent>
           </Card>
 
-          {/* Metadata */}
+         
           <Card>
             <CardHeader>
               <CardTitle>Metadata</CardTitle>

@@ -1,11 +1,5 @@
 "use client"
 
-/**
- * Example usage of MapWithLocation component
- * 
- * This file demonstrates how to use the MapWithLocation component
- * in your Next.js application.
- */
 
 import { MapWithLocation } from "./map-with-location"
 import { useState } from "react"
