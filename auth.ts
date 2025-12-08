@@ -3,7 +3,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "@/lib/prisma"
 import Credentials from "next-auth/providers/credentials"
 import Google from "next-auth/providers/google"
-import GitHub from "next-auth/providers/github"
 import { authConfig } from "./auth.config"
 import bcrypt from "bcryptjs"
 
@@ -49,17 +48,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientSecret: "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",
       allowDangerousEmailAccountLinking: true,
     }),
-    GitHub({
-      clientId: "Ov23lizVGUVYyv4oghqt",
-      clientSecret: "ff550595715e7424dfb3194cbfe33e4425d8801c",
-      allowDangerousEmailAccountLinking: true,
-     
-    }),
   ],
   callbacks: {
     ...authConfig.callbacks,
-    async signIn({ user, account, profile }) {
-      if (account?.provider === "google" || account?.provider === "github") {
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
         if (user.email) {
           const existingUser = await prisma.user.findUnique({
             where: { email: user.email },
