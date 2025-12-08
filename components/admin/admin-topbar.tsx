@@ -1,24 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { getCurrentUser } from "@/lib/mock-data"
+import { useSession } from "next-auth/react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
 export function AdminTopbar() {
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null)
+  const { data: session } = useSession()
 
-  useEffect(() => {
-    const currentUser = getCurrentUser()
-    if (currentUser) {
-      setUser({
-        name: currentUser.name,
-        email: currentUser.email,
-      })
-    }
-  }, [])
-
-  if (!user) return null
+  if (!session?.user) return null
 
   return (
     <div className="hidden md:flex h-16 border-b bg-gradient-to-r from-card via-card to-card/95 backdrop-blur-sm items-center justify-between px-6 shadow-sm">
@@ -38,13 +27,17 @@ export function AdminTopbar() {
         </Badge>
         <div className="flex items-center gap-3 pl-4 border-l">
           <div className="text-right">
-            <p className="text-sm font-medium">{user.name}</p>
-            <p className="text-xs text-muted-foreground">{user.email}</p>
+            <p className="text-sm font-medium">{session.user.name}</p>
+            <p className="text-xs text-muted-foreground">{session.user.email}</p>
           </div>
           <Avatar className="h-9 w-9 ring-2 ring-accent/20 hover:ring-accent/40 transition-all cursor-pointer">
-            <AvatarFallback className="bg-gradient-to-br from-accent to-accent/80 text-accent-foreground font-semibold">
-              {user.name.charAt(0).toUpperCase()}
-            </AvatarFallback>
+            {session.user.image ? (
+              <img src={session.user.image} alt={session.user.name || ""} />
+            ) : (
+              <AvatarFallback className="bg-gradient-to-br from-accent to-accent/80 text-accent-foreground font-semibold">
+                {session.user.name?.charAt(0).toUpperCase() || "A"}
+              </AvatarFallback>
+            )}
           </Avatar>
         </div>
       </div>

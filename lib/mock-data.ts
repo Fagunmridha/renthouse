@@ -1,17 +1,6 @@
 import type { Property, User, Message } from "./types"
 
-export const locations = [
-  "New York",
-  "Los Angeles",
-  "Chicago",
-  "Houston",
-  "Phoenix",
-  "Philadelphia",
-  "San Antonio",
-  "San Diego",
-  "Dallas",
-  "Miami",
-]
+
 
 export const mockUsers: User[] = [
   {

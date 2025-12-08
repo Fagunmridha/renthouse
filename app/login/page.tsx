@@ -1,22 +1,22 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Home, Loader2, Eye, EyeOff } from "lucide-react"
+import { signIn } from "next-auth/react"
+import { Home, Loader2, Eye, EyeOff, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
-import { getStoredUsers, setCurrentUser } from "@/lib/mock-data"
 
 export default function LoginPage() {
   const router = useRouter()
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
+  const [oauthLoading, setOauthLoading] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
@@ -27,34 +27,50 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
 
-  
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    const users = getStoredUsers()
-    const user = users.find((u) => u.email === formData.email && u.password === formData.password)
-
-    if (user) {
-      setCurrentUser(user)
-      toast({
-        title: "Welcome back!",
-        description: `You've successfully logged in as ${user.name}.`,
+    try {
+      const result = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
       })
-      if (user.role === "ADMIN") {
-        router.push("/#")
-      } else if (user.role === "OWNER") {
-        router.push("/dashboard")
-      } else {
-        router.push("/properties")
+
+      if (result?.error) {
+        toast({
+          title: "Login failed",
+          description: "Invalid email or password.",
+          variant: "destructive",
+        })
+      } else if (result?.ok) {
+        toast({
+          title: "Welcome back!",
+          description: "You've successfully logged in.",
+        })
+        router.push("/")
+        router.refresh()
       }
-    } else {
+    } catch (error) {
       toast({
         title: "Login failed",
-        description: "Invalid email or password. Try: fagunandy@gmail.com / admin123 (Admin) or john@example.com / password123 (Owner)",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       })
+    } finally {
+      setLoading(false)
     }
+  }
 
-    setLoading(false)
+  const handleOAuthSignIn = async (provider: "google" | "github") => {
+    setOauthLoading(provider)
+    try {
+      await signIn(provider, { callbackUrl: "/" })
+    } catch (error) {
+      toast({
+        title: "Login failed",
+        description: `Failed to sign in with ${provider}. Please try again.`,
+        variant: "destructive",
+      })
+      setOauthLoading(null)
+    }
   }
 
   return (
@@ -66,7 +82,7 @@ export default function LoginPage() {
             <span className="text-2xl font-bold">RentHouse</span>
           </Link>
           <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <CardDescription>Enter your credentials to access your account</CardDescription>
+          <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
@@ -103,26 +119,82 @@ export default function LoginPage() {
                 </Button>
               </div>
             </div>
-            <div className="text-sm text-muted-foreground bg-muted p-3 rounded-lg">
-              <p className="font-medium mb-1">Demo credentials:</p>
-              <p>Admin: fagunandy@gmail.com / admin123</p>
-              <p>Owner: john@example.com / password123</p>
-              <p>Renter: mike@example.com / password123</p>
-            </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full" disabled={loading || !!oauthLoading}>
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                   Signing in...
                 </>
               ) : (
-                "Sign in"
+                "Sign in with Email"
               )}
             </Button>
-            <p className="text-sm text-muted-foreground">
-              Don't have an account?{" "}
+
+            <div className="relative w-full">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 w-full">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignIn("google")}
+                disabled={loading || !!oauthLoading}
+              >
+                {oauthLoading === "google" ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <>
+                    <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                      />
+                    </svg>
+                    Google
+                  </>
+                )}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => handleOAuthSignIn("github")}
+                disabled={loading || !!oauthLoading}
+              >
+                {oauthLoading === "github" ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <>
+                    <Github className="h-4 w-4 mr-2" />
+                    GitHub
+                  </>
+                )}
+              </Button>
+            </div>
+
+            <p className="text-sm text-muted-foreground text-center">
+              Don&apos;t have an account?{" "}
               <Link href="/register" className="text-accent hover:underline">
                 Sign up
               </Link>

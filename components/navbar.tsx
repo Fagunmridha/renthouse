@@ -14,9 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { getCurrentUser, setCurrentUser } from "@/lib/mock-data"
-import type { User as UserType } from "@/lib/types"
 import { useTheme } from "next-themes"
+import { useSession, signOut } from "next-auth/react"
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -26,20 +25,17 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname()
-  const [user, setUser] = useState<UserType | null>(null)
+  const { data: session } = useSession()
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    setUser(getCurrentUser())
   }, [])
 
-  const handleLogout = () => {
-    setCurrentUser(null)
-    setUser(null)
-    window.location.href = "/"
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" })
   }
 
   return (
@@ -71,31 +67,39 @@ export function Navbar() {
             </Button>
           )}
 
-          {user ? (
+          {session?.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                   <Avatar className="h-9 w-9">
-                    <AvatarFallback className="bg-accent text-accent-foreground">
-                      {user.name.charAt(0).toUpperCase()}
-                    </AvatarFallback>
+                    {session.user.image ? (
+                      <img src={session.user.image} alt={session.user.name || ""} />
+                    ) : (
+                      <AvatarFallback className="bg-accent text-accent-foreground">
+                        {session.user.name?.charAt(0).toUpperCase() || "U"}
+                      </AvatarFallback>
+                    )}
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end">
                 <div className="flex items-center gap-2 p-2">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-accent text-accent-foreground">
-                      {user.name.charAt(0).toUpperCase()}
-                    </AvatarFallback>
+                    {session.user.image ? (
+                      <img src={session.user.image} alt={session.user.name || ""} />
+                    ) : (
+                      <AvatarFallback className="bg-accent text-accent-foreground">
+                        {session.user.name?.charAt(0).toUpperCase() || "U"}
+                      </AvatarFallback>
+                    )}
                   </Avatar>
                   <div className="flex flex-col">
-                    <p className="text-sm font-medium">{user.name}</p>
-                    <p className="text-xs text-muted-foreground">{user.email}</p>
+                    <p className="text-sm font-medium">{session.user.name}</p>
+                    <p className="text-xs text-muted-foreground">{session.user.email}</p>
                   </div>
                 </div>
                 <DropdownMenuSeparator />
-                {user.role === "ADMIN" && (
+                {session.user.role === "ADMIN" && (
                   <>
                     <DropdownMenuItem asChild>
                       <Link href="/admin" className="cursor-pointer">
@@ -112,7 +116,7 @@ export function Navbar() {
                     <DropdownMenuSeparator />
                   </>
                 )}
-                {(user.role === "OWNER" || user.role === "ADMIN") && (
+                {(session.user.role === "OWNER" || session.user.role === "ADMIN") && (
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard" className="cursor-pointer">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -170,7 +174,7 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 ))}
-                {!user && (
+                {!session?.user && (
                   <>
                     <Link href="/login" onClick={() => setOpen(false)} className="text-lg font-medium">
                       Log in
@@ -180,7 +184,7 @@ export function Navbar() {
                     </Link>
                   </>
                 )}
-                {user?.role === "ADMIN" && (
+                {session?.user?.role === "ADMIN" && (
                   <>
                     <Link href="/admin" onClick={() => setOpen(false)} className="text-lg font-medium">
                       Admin Dashboard
@@ -190,7 +194,7 @@ export function Navbar() {
                     </Link>
                   </>
                 )}
-                {(user?.role === "OWNER" || user?.role === "ADMIN") && (
+                {(session?.user?.role === "OWNER" || session?.user?.role === "ADMIN") && (
                   <Link href="/dashboard" onClick={() => setOpen(false)} className="text-lg font-medium">
                     Owner Dashboard
                   </Link>

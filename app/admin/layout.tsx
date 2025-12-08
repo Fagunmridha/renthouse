@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { getCurrentUser } from "@/lib/mock-data"
+import { useSession } from "next-auth/react"
 import { AdminSidebar } from "@/components/admin/admin-sidebar"
 import { AdminTopbar } from "@/components/admin/admin-topbar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -11,22 +11,27 @@ import { Menu, Home as HomeIcon } from "lucide-react"
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
+  const { data: session, status } = useSession()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
-    const user = getCurrentUser()
-    if (!user || user.role !== "ADMIN") {
+    if (status === "unauthenticated") {
+      router.push("/login")
+    } else if (status === "authenticated" && session?.user?.role !== "ADMIN") {
       router.push("/")
     }
-  }, [router])
+  }, [status, session, router])
 
-  const user = getCurrentUser()
-  if (!user || user.role !== "ADMIN") {
+  if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
       </div>
     )
+  }
+
+  if (!session?.user || session.user.role !== "ADMIN") {
+    return null
   }
 
   return (

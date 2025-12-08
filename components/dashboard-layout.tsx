@@ -9,8 +9,7 @@ import { Home, LayoutDashboard, Building, Plus, MessageSquare, LogOut, Menu } fr
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { getCurrentUser, setCurrentUser } from "@/lib/mock-data"
-import type { User } from "@/lib/types"
+import { useSession, signOut } from "next-auth/react"
 
 const sidebarLinks = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -22,29 +21,31 @@ const sidebarLinks = [
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const [user, setUser] = useState<User | null>(null)
+  const { data: session, status } = useSession()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const currentUser = getCurrentUser()
-    if (!currentUser || (currentUser.role !== "OWNER" && currentUser.role !== "ADMIN")) {
+    if (status === "unauthenticated") {
       router.push("/login")
-    } else {
-      setUser(currentUser)
+    } else if (status === "authenticated" && session?.user?.role !== "OWNER" && session?.user?.role !== "ADMIN") {
+      router.push("/properties")
     }
-  }, [router])
+  }, [status, session, router])
 
-  const handleLogout = () => {
-    setCurrentUser(null)
-    router.push("/")
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" })
   }
 
-  if (!user) {
+  if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
       </div>
     )
+  }
+
+  if (!session?.user) {
+    return null
   }
 
   const SidebarContent = () => (
@@ -81,13 +82,17 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <div className="p-4 border-t">
         <div className="flex items-center gap-3 mb-4">
           <Avatar>
-            <AvatarFallback className="bg-accent text-accent-foreground">
-              {user.name.charAt(0).toUpperCase()}
-            </AvatarFallback>
+            {session.user.image ? (
+              <img src={session.user.image} alt={session.user.name || ""} />
+            ) : (
+              <AvatarFallback className="bg-accent text-accent-foreground">
+                {session.user.name?.charAt(0).toUpperCase() || "U"}
+              </AvatarFallback>
+            )}
           </Avatar>
           <div>
-            <p className="text-sm font-medium">{user.name}</p>
-            <p className="text-xs text-muted-foreground">{user.email}</p>
+            <p className="text-sm font-medium">{session.user.name}</p>
+            <p className="text-xs text-muted-foreground">{session.user.email}</p>
           </div>
         </div>
         <Button variant="outline" className="w-full bg-transparent" onClick={handleLogout}>

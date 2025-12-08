@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { LayoutDashboard, Building2, LogOut, Home, Building, Plus, MessageSquare, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { setCurrentUser } from "@/lib/mock-data"
+import { signOut } from "next-auth/react"
 
 const adminLinks = [
   { href: "/admin", label: "Admin Dashboard", icon: LayoutDashboard },
@@ -25,9 +25,8 @@ export function AdminSidebar({ onLinkClick }: AdminSidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
 
-  const handleLogout = () => {
-    setCurrentUser(null)
-    router.push("/")
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" })
     onLinkClick?.()
   }
 
