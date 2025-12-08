@@ -13,7 +13,6 @@ const adminLinks = [
   { href: "/dashboard", label: "Owner Dashboard", icon: Building },
   { href: "/dashboard/my-properties", label: "My Properties", icon: Building },
   { href: "/dashboard/add-property", label: "Add Property", icon: Plus },
-  { href: "/dashboard/messages", label: "Messages", icon: MessageSquare },
   { href: "/properties", label: "Browse Properties", icon: Search },
 ]
 
