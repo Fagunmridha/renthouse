@@ -7,7 +7,7 @@ import { MapPin, Bed, DollarSign, Users, Star, Heart } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { addToFavorites, removeFromFavorites, isFavorite } from "@/lib/mock-data"
+import { useSession } from "next-auth/react"
 import type { Property, FamilyType } from "@/lib/types"
 
 const familyTypeLabels: Record<FamilyType, string> = {
@@ -21,38 +21,86 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {
-  const [favorited, setFavorited] = useState(() => isFavorite(property.id))
+  const { data: session } = useSession()
+  const [favorited, setFavorited] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const checkFavorite = () => {
-      setFavorited(isFavorite(property.id))
+    const checkFavorite = async () => {
+      if (!session?.user?.id) {
+        setFavorited(false)
+        return
+      }
+
+      try {
+        const response = await fetch(`/api/favorites/check?propertyId=${property.id}`)
+        if (response.ok) {
+          const data = await response.json()
+          setFavorited(data.isFavorite)
+        }
+      } catch (error) {
+        console.error("Error checking favorite:", error)
+      }
     }
     checkFavorite()
-    
-   
-    window.addEventListener("storage", checkFavorite)
-    return () => window.removeEventListener("storage", checkFavorite)
-  }, [property.id])
+  }, [property.id, session?.user?.id])
 
-  const handleFavoriteClick = (e: React.MouseEvent) => {
+  const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    if (favorited) {
-      removeFromFavorites(property.id)
-      setFavorited(false)
-    } else {
-      addToFavorites(property.id)
-      setFavorited(true)
+
+    if (!session?.user?.id) {
+      return
     }
-   
-    window.dispatchEvent(new CustomEvent("favorites-changed"))
+
+    setLoading(true)
+    try {
+      if (favorited) {
+        const response = await fetch(`/api/favorites?propertyId=${property.id}`, {
+          method: "DELETE",
+        })
+        if (response.ok) {
+          setFavorited(false)
+        }
+      } else {
+        const response = await fetch("/api/favorites", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ propertyId: property.id }),
+        })
+        if (response.ok) {
+          setFavorited(true)
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const getImageUrl = () => {
+    if (Array.isArray(property.images) && property.images.length > 0) {
+      return property.images[0]
+    }
+    if (typeof property.images === "string") {
+      try {
+        const parsed = JSON.parse(property.images)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed[0]
+        }
+      } catch {
+        // Invalid JSON, use placeholder
+      }
+    }
+    return "/placeholder.svg?height=300&width=400&query=house"
   }
 
   return (
     <Card className="group overflow-hidden transition-all hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
-          src={property.images[0] || "/placeholder.svg?height=300&width=400&query=house"}
+          src={getImageUrl()}
           alt={property.title}
           fill
           className="object-cover transition-transform group-hover:scale-105"
@@ -63,17 +111,20 @@ export function PropertyCard({ property }: PropertyCardProps) {
             Featured
           </Badge>
         )}
-        <Button
-          variant="ghost"
-          size="icon"
-          className={`absolute top-3 right-3 h-9 w-9 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background/90 ${
-            favorited ? "text-red-500" : "text-muted-foreground"
-          }`}
-          onClick={handleFavoriteClick}
-          aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
-        >
-          <Heart className={`h-5 w-5 ${favorited ? "fill-current" : ""}`} />
-        </Button>
+        {session?.user && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className={`absolute top-3 right-3 h-9 w-9 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background/90 ${
+              favorited ? "text-red-500" : "text-muted-foreground"
+            }`}
+            onClick={handleFavoriteClick}
+            disabled={loading}
+            aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Heart className={`h-5 w-5 ${favorited ? "fill-current" : ""}`} />
+          </Button>
+        )}
         {!property.available && (
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
             <Badge variant="secondary" className="text-lg">

@@ -7,38 +7,43 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { PropertyCard } from "@/components/property-card"
-import { getStoredMessages, getCurrentUser } from "@/lib/mock-data"
-import type { Property, Message } from "@/lib/types"
+import { useSession } from "next-auth/react"
+import type { Property } from "@/lib/types"
 
 export default function DashboardPage() {
+  const { data: session } = useSession()
   const [properties, setProperties] = useState<Property[]>([])
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<any[]>([])
 
   useEffect(() => {
-    const user = getCurrentUser()
-    if (user) {
-      const fetchProperties = async () => {
-        try {
-          const response = await fetch(user.role === "ADMIN" ? "/api/properties?admin=true" : "/api/properties")
-          if (response.ok) {
-            const allProperties = await response.json()
-            const userProperties = user.role === "ADMIN" 
+    const fetchData = async () => {
+      if (!session?.user?.id) return
+
+      try {
+        const propertiesResponse = await fetch(
+          session.user.role === "ADMIN" ? "/api/properties?admin=true" : "/api/properties"
+        )
+        if (propertiesResponse.ok) {
+          const allProperties = await propertiesResponse.json()
+          const userProperties =
+            session.user.role === "ADMIN"
               ? allProperties
-              : allProperties.filter((p: Property) => p.ownerId === user.id)
-            setProperties(userProperties)
-          }
-        } catch (error) {
-          console.error("Error fetching properties:", error)
+              : allProperties.filter((p: Property) => p.ownerId === session.user.id)
+          setProperties(userProperties)
         }
+
+        const messagesResponse = await fetch("/api/messages")
+        if (messagesResponse.ok) {
+          const allMessages = await messagesResponse.json()
+          setMessages(allMessages)
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error)
       }
-
-      fetchProperties()
-
-      const allMessages = getStoredMessages()
-      const userMessages = allMessages.filter((m) => m.ownerId === user.id)
-      setMessages(userMessages)
     }
-  }, [])
+
+    fetchData()
+  }, [session?.user?.id, session?.user?.role])
 
   const totalRevenue = properties.reduce((sum, p) => sum + p.price, 0)
   const availableCount = properties.filter((p) => p.available).length

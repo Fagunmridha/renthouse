@@ -17,8 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { useToast } from "@/hooks/use-toast"
-import type { Property, Message } from "@/lib/types"
-import { getStoredMessages, setStoredMessages } from "@/lib/mock-data"
+import type { Property } from "@/lib/types"
 
 interface MessageModalProps {
   property: Property
@@ -38,30 +37,39 @@ export function MessageModal({ property }: MessageModalProps) {
     e.preventDefault()
     setLoading(true)
 
-  
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          propertyId: property.id,
+          ownerId: property.ownerId,
+          senderName: formData.senderName,
+          senderPhone: formData.senderPhone,
+          message: formData.message,
+        }),
+      })
 
-    const newMessage: Message = {
-      id: `msg-${Date.now()}`,
-      propertyId: property.id,
-      ownerId: property.ownerId,
-      senderName: formData.senderName,
-      senderPhone: formData.senderPhone,
-      message: formData.message,
-      createdAt: new Date(),
+      if (!response.ok) {
+        throw new Error("Failed to send message")
+      }
+
+      setLoading(false)
+      setOpen(false)
+      setFormData({ senderName: "", senderPhone: "", message: "" })
+
+      toast({
+        title: "Message sent!",
+        description: `Your message has been sent to ${property.ownerName}.`,
+      })
+    } catch (error) {
+      setLoading(false)
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      })
     }
-
-    const messages = getStoredMessages()
-    setStoredMessages([...messages, newMessage])
-
-    setLoading(false)
-    setOpen(false)
-    setFormData({ senderName: "", senderPhone: "", message: "" })
-
-    toast({
-      title: "Message sent!",
-      description: `Your message has been sent to ${property.ownerName}.`,
-    })
   }
 
   return (

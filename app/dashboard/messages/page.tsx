@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { MessageSquare, Phone, Calendar, ExternalLink, Trash2 } from "lucide-react"
+import { MessageSquare, Phone, Calendar, ExternalLink, Trash2, Loader2 } from "lucide-react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -19,50 +19,76 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useToast } from "@/hooks/use-toast"
-import { getStoredMessages, setStoredMessages, getStoredProperties, getCurrentUser } from "@/lib/mock-data"
-import type { Message, Property } from "@/lib/types"
+import { useSession } from "next-auth/react"
+import type { Property } from "@/lib/types"
 
-interface MessageWithProperty extends Message {
+interface Message {
+  id: string
+  propertyId: string
+  ownerId: string
+  senderName: string
+  senderPhone: string
+  message: string
+  createdAt: string
   property?: Property
 }
 
 export default function MessagesPage() {
   const { toast } = useToast()
+  const { data: session } = useSession()
+  const [messages, setMessages] = useState<Message[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const loadMessages = (): MessageWithProperty[] => {
-    const user = getCurrentUser()
-    if (user) {
-      const allMessages = getStoredMessages()
-      const userMessages = user.role === "ADMIN" 
-        ? allMessages 
-        : allMessages.filter((m) => m.ownerId === user.id)
-      const properties = getStoredProperties()
+  useEffect(() => {
+    const loadMessages = async () => {
+      if (!session?.user?.id) {
+        setLoading(false)
+        return
+      }
 
-      const messagesWithProperty = userMessages.map((msg) => ({
-        ...msg,
-        property: properties.find((p) => p.id === msg.propertyId),
-      }))
-
-      messagesWithProperty.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-
-      return messagesWithProperty
+      try {
+        const response = await fetch("/api/messages")
+        if (response.ok) {
+          const data = await response.json()
+          setMessages(data)
+        }
+      } catch (error) {
+        console.error("Error loading messages:", error)
+        toast({
+          title: "Error",
+          description: "Failed to load messages.",
+          variant: "destructive",
+        })
+      } finally {
+        setLoading(false)
+      }
     }
-    return []
-  }
 
-  const [messages, setMessages] = useState<MessageWithProperty[]>(() => loadMessages())
+    loadMessages()
+  }, [session?.user?.id, toast])
 
-  const handleDelete = (messageId: string) => {
-    const allMessages = getStoredMessages()
-    const updatedMessages = allMessages.filter((m) => m.id !== messageId)
-    setStoredMessages(updatedMessages)
-    
-    setMessages(messages.filter((m) => m.id !== messageId))
-    
-    toast({
-      title: "Message deleted",
-      description: "The message has been removed successfully.",
-    })
+  const handleDelete = async (messageId: string) => {
+    try {
+      const response = await fetch(`/api/messages?id=${messageId}`, {
+        method: "DELETE",
+      })
+
+      if (response.ok) {
+        setMessages(messages.filter((m) => m.id !== messageId))
+        toast({
+          title: "Message deleted",
+          description: "The message has been removed successfully.",
+        })
+      } else {
+        throw new Error("Failed to delete")
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete message.",
+        variant: "destructive",
+      })
+    }
   }
 
   return (
@@ -73,7 +99,14 @@ export default function MessagesPage() {
           <p className="text-muted-foreground">View inquiries from potential renters</p>
         </div>
 
-        {messages.length === 0 ? (
+        {loading ? (
+          <Card>
+            <CardContent className="p-12 text-center">
+              <Loader2 className="h-12 w-12 mx-auto text-muted-foreground mb-4 animate-spin" />
+              <p className="text-muted-foreground">Loading messages...</p>
+            </CardContent>
+          </Card>
+        ) : messages.length === 0 ? (
           <Card>
             <CardContent className="p-12 text-center">
               <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />

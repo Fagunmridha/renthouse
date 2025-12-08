@@ -5,23 +5,34 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { PropertyGrid } from "@/components/property-grid"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getFavorites } from "@/lib/mock-data"
+import { useSession } from "next-auth/react"
 import type { Property } from "@/lib/types"
 import { Heart } from "lucide-react"
 
 export default function FavoritesPage() {
+  const { data: session } = useSession()
   const [favoriteProperties, setFavoriteProperties] = useState<Property[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const loadFavorites = async () => {
+      if (!session?.user?.id) {
+        setLoading(false)
+        return
+      }
+
       try {
-        const response = await fetch("/api/properties")
+        const response = await fetch("/api/favorites")
         if (response.ok) {
-          const allProperties = await response.json()
-          const favoriteIds = getFavorites()
-          const favorites = allProperties.filter((p: Property) => favoriteIds.includes(p.id))
-          setFavoriteProperties(favorites)
+          const favorites = await response.json()
+          const properties = favorites
+            .map((f: any) => f.property)
+            .filter(Boolean)
+            .map((p: any) => ({
+              ...p,
+              images: Array.isArray(p.images) ? p.images : typeof p.images === "string" ? JSON.parse(p.images) : [],
+            }))
+          setFavoriteProperties(properties)
         }
       } catch (error) {
         console.error("Error loading favorites:", error)
@@ -31,17 +42,7 @@ export default function FavoritesPage() {
     }
 
     loadFavorites()
-
-    const handleFavoritesChanged = () => {
-      loadFavorites()
-    }
-
-    window.addEventListener("favorites-changed", handleFavoritesChanged)
-
-    return () => {
-      window.removeEventListener("favorites-changed", handleFavoritesChanged)
-    }
-  }, [])
+  }, [session?.user?.id])
 
   return (
     <div className="min-h-screen flex flex-col">
