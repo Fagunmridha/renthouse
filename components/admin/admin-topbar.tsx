@@ -10,7 +10,7 @@ export function AdminTopbar() {
   if (!session?.user) return null
 
   return (
-    <div className="hidden md:flex h-16 border-b bg-gradient-to-r from-card via-card to-card/95 backdrop-blur-sm items-center justify-between px-6 shadow-sm">
+    <div className="flex h-16 border-b bg-gradient-to-r from-card via-card to-card/95 backdrop-blur-sm items-center justify-between px-6 shadow-sm">
       <div className="flex items-center gap-3">
         <div className="h-10 w-1 rounded-full bg-gradient-to-b from-accent to-accent/50" />
         <div>

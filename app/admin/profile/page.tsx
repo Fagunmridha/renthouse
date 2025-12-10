@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Loader2, Users, Building, Settings, MapPin, Tag } from "lucide-react"
-import AdminLayout from "@/app/admin/layout"
+import { Loader2, Users, Building, Settings, MapPin, Tag, ArrowLeft } from "lucide-react"
+import { Footer } from "@/components/footer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ProfileCard } from "@/components/profile/profile-card"
@@ -56,21 +56,41 @@ export default function AdminProfilePage() {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="min-h-screen flex flex-col bg-background">
+        <div className="flex-1 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-accent" />
         </div>
-      </AdminLayout>
+        <Footer />
+      </div>
     )
   }
 
   if (!profile) {
-    return null
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-muted-foreground">Failed to load profile</p>
+        </div>
+        <Footer />
+      </div>
+    )
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="min-h-screen flex flex-col bg-background">
+      <main className="flex-1 container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
+        <div className="mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => router.push("/admin")}
+            className="mb-4"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Admin Dashboard
+          </Button>
+        </div>
+        
+        <div className="space-y-6">
         <div className="mb-2">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
             Admin Profile
@@ -173,7 +193,9 @@ export default function AdminProfilePage() {
           </div>
         </div>
       </div>
-    </AdminLayout>
+      </main>
+      <Footer />
+    </div>
   )
 }
 

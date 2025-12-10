@@ -35,13 +35,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen flex">
-       <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 z-50">
+    <div className="min-h-screen flex bg-background">
+      {/* Desktop Sidebar - Fixed, only on md+ */}
+      <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 z-50 bg-background border-r">
         <AdminSidebar />
-      </aside> 
+      </aside>
       
-      <div className="md:pl-64 flex flex-col flex-1 w-full">
-        <div className="md:hidden sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
+      {/* Main Content Area */}
+      <div className="md:pl-64 flex flex-col flex-1 w-full min-w-0">
+        {/* Mobile Header - Only on mobile */}
+        <header className="md:hidden sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
           <div className="flex items-center justify-between p-3">
             <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
               <SheetTrigger asChild>
@@ -49,9 +52,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-               <SheetContent side="left" className="w-[280px] p-0">
+              <SheetContent side="left" className="w-[280px] p-0">
                 <AdminSidebar onLinkClick={() => setSidebarOpen(false)} />
-              </SheetContent> 
+              </SheetContent>
             </Sheet>
             <div className="flex items-center gap-2">
               <span className="text-lg font-semibold">RentHouse</span>
@@ -61,10 +64,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <HomeIcon className="h-5 w-5" />
             </Button>
           </div>
+        </header>
+        
+        {/* Desktop Topbar - Only on md+ */}
+        <div className="hidden md:block">
+          <AdminTopbar />
         </div>
         
-         <AdminTopbar />
-        <main className="flex-1 p-4 sm:p-6 bg-background">
+        {/* Main Content */}
+        <main className="flex-1 p-4 sm:p-6 bg-background overflow-auto">
           {children}
         </main>
       </div>
