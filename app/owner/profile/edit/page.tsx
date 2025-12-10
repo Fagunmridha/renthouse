@@ -124,7 +124,6 @@ export default function OwnerProfileEditPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
-      {/* Header Section */}
       <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600">
         <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,transparent)]" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -159,7 +158,6 @@ export default function OwnerProfileEditPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Personal Information */}
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
                   <Mail className="h-5 w-5 text-blue-600" />
@@ -211,7 +209,6 @@ export default function OwnerProfileEditPage() {
                 </div>
               </div>
 
-              {/* Profile Image */}
               <div className="space-y-4 pt-4 border-t">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
                   <Home className="h-5 w-5 text-purple-600" />
@@ -250,7 +247,6 @@ export default function OwnerProfileEditPage() {
                 )}
               </div>
 
-              {/* Password Section */}
               <div className="space-y-4 pt-4 border-t">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
                   <Lock className="h-5 w-5 text-green-600" />

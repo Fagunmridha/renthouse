@@ -36,14 +36,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen flex bg-background">
-      {/* Desktop Sidebar - Fixed, only on md+ */}
       <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 z-50 bg-background border-r">
         <AdminSidebar />
       </aside>
       
-      {/* Main Content Area */}
       <div className="md:pl-64 flex flex-col flex-1 w-full min-w-0">
-        {/* Mobile Header - Only on mobile */}
         <header className="md:hidden sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
           <div className="flex items-center justify-between p-3">
             <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
@@ -66,12 +63,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </header>
         
-        {/* Desktop Topbar - Only on md+ */}
         <div className="hidden md:block">
           <AdminTopbar />
         </div>
         
-        {/* Main Content */}
         <main className="flex-1 p-4 sm:p-6 bg-background overflow-auto">
           {children}
         </main>

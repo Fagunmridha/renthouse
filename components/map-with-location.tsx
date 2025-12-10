@@ -267,7 +267,6 @@ export function MapWithLocation({
     <div className="space-y-4">
       <LoadScript googleMapsApiKey={apiKey} libraries={libraries} onLoad={() => setMapLoaded(true)}>
         <div className="space-y-4">
-          {/* Location Dropdowns */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div className="space-y-2">
               <Label htmlFor="division">Division</Label>
@@ -336,7 +335,6 @@ export function MapWithLocation({
             </div>
           </div>
 
-          {/* Places Autocomplete Search Box */}
           <div className="space-y-2">
             <Label htmlFor="places-search">Search Location</Label>
             <Autocomplete
@@ -356,7 +354,6 @@ export function MapWithLocation({
             </Autocomplete>
           </div>
 
-          {/* Google Map */}
           <div className="relative h-[500px] w-full overflow-hidden rounded-lg border">
             {mapLoaded ? (
               <GoogleMap
@@ -385,7 +382,6 @@ export function MapWithLocation({
             )}
           </div>
 
-          {/* Location Info Display */}
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Selected Location</CardTitle>

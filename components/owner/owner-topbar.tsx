@@ -28,7 +28,6 @@ export function OwnerTopbar() {
 
   return (
     <div className="h-16 border-b bg-gradient-to-r from-card via-card to-card/95 backdrop-blur-sm flex items-center justify-between px-6 shadow-sm">
-      {/* Search Bar */}
       <form onSubmit={handleSearch} className="flex-1 max-w-md">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -42,9 +41,7 @@ export function OwnerTopbar() {
         </div>
       </form>
 
-      {/* Right Section */}
       <div className="flex items-center gap-4">
-        {/* Notifications */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative">
@@ -75,7 +72,6 @@ export function OwnerTopbar() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* User Avatar */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">

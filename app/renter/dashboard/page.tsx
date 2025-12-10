@@ -66,7 +66,6 @@ export default function RenterDashboardPage() {
         <p className="text-muted-foreground">Find your perfect home</p>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -113,7 +112,6 @@ export default function RenterDashboardPage() {
         </Card>
       </div>
 
-      {/* Quick Actions */}
       <Card>
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>

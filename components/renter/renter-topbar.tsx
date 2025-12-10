@@ -28,7 +28,6 @@ export function RenterTopbar() {
 
   return (
     <div className="h-16 border-b bg-gradient-to-r from-card via-card to-card/95 backdrop-blur-sm flex items-center justify-between px-6 shadow-sm">
-      {/* Search Bar */}
       <form onSubmit={handleSearch} className="flex-1 max-w-md flex items-center gap-2">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -51,9 +50,7 @@ export function RenterTopbar() {
         </Button>
       </form>
 
-      {/* Right Section */}
       <div className="flex items-center gap-4">
-        {/* User Avatar */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">

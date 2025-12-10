@@ -112,7 +112,6 @@ export default function RenterProfilePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
-      {/* Hero Header Section */}
       <div className="relative overflow-hidden bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600">
         <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,transparent)]" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -185,7 +184,6 @@ export default function RenterProfilePage() {
       </div>
 
       <main className="flex-1 container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
-        {/* Statistics Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <Card className="relative overflow-hidden border-2 border-red-500/20 bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/30 dark:to-red-900/20 group hover:shadow-xl transition-all duration-300">
             <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full -mr-16 -mt-16 blur-2xl" />
@@ -222,7 +220,6 @@ export default function RenterProfilePage() {
           </Card>
         </div>
 
-        {/* Saved Properties Section */}
         <Card className="border-2 shadow-xl bg-gradient-to-br from-card via-card to-muted/20 mb-6">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -261,7 +258,6 @@ export default function RenterProfilePage() {
           </CardContent>
         </Card>
 
-        {/* Recent Messages Section */}
         <Card className="border-2 shadow-xl bg-gradient-to-br from-card via-card to-muted/20 mb-6">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -312,7 +308,6 @@ export default function RenterProfilePage() {
           </CardContent>
         </Card>
 
-        {/* Quick Actions Section */}
         <Card className="border-2 shadow-xl bg-gradient-to-br from-card via-card to-muted/20">
           <CardHeader>
             <CardTitle className="text-2xl font-bold flex items-center gap-2">
