@@ -104,10 +104,10 @@ export function PropertyActions({ property }: PropertyActionsProps) {
         size="sm"
         onClick={handleApprove}
         disabled={loading !== null}
-        className="text-green-600 hover:text-green-700 hover:bg-green-50 flex-1"
+        className="text-green-600 hover:text-green-700 hover:bg-green-50 border-green-500/20 hover:border-green-500/40 flex-1 group"
       >
-        <CheckCircle className="h-4 w-4 mr-1" />
-        Approve
+        <CheckCircle className="h-4 w-4 mr-1 group-hover:scale-110 transition-transform" />
+        {loading === "approve" ? "Approving..." : "Approve"}
       </Button>
       <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -115,9 +115,9 @@ export function PropertyActions({ property }: PropertyActionsProps) {
             variant="outline"
             size="sm"
             disabled={loading !== null}
-            className="text-red-600 hover:text-red-700 hover:bg-red-50 flex-1"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-500/20 hover:border-red-500/40 flex-1 group"
           >
-            <XCircle className="h-4 w-4 mr-1" />
+            <XCircle className="h-4 w-4 mr-1 group-hover:scale-110 transition-transform" />
             Reject
           </Button>
         </AlertDialogTrigger>
@@ -125,7 +125,7 @@ export function PropertyActions({ property }: PropertyActionsProps) {
           <AlertDialogHeader>
             <AlertDialogTitle>Reject Property</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to reject "{property.title}"? This property will not be visible to renters.
+              Are you sure you want to reject "{property.title}"? This property will not be visible to renters and this action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -134,7 +134,7 @@ export function PropertyActions({ property }: PropertyActionsProps) {
               onClick={handleReject}
               className="bg-red-600 text-white hover:bg-red-700"
             >
-              Reject
+              {loading === "reject" ? "Rejecting..." : "Reject Property"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
