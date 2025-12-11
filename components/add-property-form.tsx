@@ -12,8 +12,8 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/hooks/use-toast"
+import { useSession } from "next-auth/react"
 import type { Property, FamilyType } from "@/lib/types"
-import { getCurrentUser } from "@/lib/mock-data"
 import { getAllDistricts, getUpazilasByDistrict } from "@/lib/bangladesh-locations"
 
 const familyTypes: { value: FamilyType; label: string }[] = [
@@ -29,6 +29,7 @@ interface AddPropertyFormProps {
 export function AddPropertyForm({ property }: AddPropertyFormProps) {
   const router = useRouter()
   const { toast } = useToast()
+  const { data: session } = useSession()
   const isEditing = !!property
 
   const [loading, setLoading] = useState(false)
@@ -155,8 +156,7 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
       return
     }
 
-    const user = getCurrentUser()
-    if (!user) {
+    if (!session?.user?.id) {
       toast({
         title: "Error",
         description: "You must be logged in to add a property.",
@@ -214,10 +214,10 @@ export function AddPropertyForm({ property }: AddPropertyFormProps) {
           featured: formData.featured,
           approved: false,
           images: images.length > 0 ? images : ["/cozy-suburban-house.png"],
-          ownerId: user.id,
-          ownerName: user.name,
-          ownerEmail: user.email,
-          ownerPhone: user.phone || "",
+          ownerId: session.user.id,
+          ownerName: session.user.name || "",
+          ownerEmail: session.user.email || "",
+          ownerPhone: session.user.phone || "",
           createdAt: new Date(),
         }
 

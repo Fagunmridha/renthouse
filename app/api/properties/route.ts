@@ -1,11 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { auth } from "@/auth"
 import type { Property } from "@/lib/types"
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
   try {
+    const session = await auth()
     const where: any = {}
 
     const location = searchParams.get("location")
@@ -40,8 +42,34 @@ export async function GET(request: NextRequest) {
     }
 
     const isAdmin = searchParams.get("admin") === "true"
-    
-    if (!isAdmin) {
+    const isOwner = session?.user?.role === "OWNER"
+    const ownerId = session?.user?.id
+
+    if (isAdmin) {
+    } else if (isOwner && ownerId) {
+      const existingFilters = { ...where }
+      
+      Object.keys(where).forEach(key => delete where[key])
+      
+      const conditions: any[] = []
+      
+      if (Object.keys(existingFilters).length > 0) {
+        conditions.push(existingFilters)
+      }
+      
+      conditions.push({
+        OR: [
+          { ownerId: ownerId },
+          { approved: true },
+        ],
+      })
+      
+      if (conditions.length > 1) {
+        where.AND = conditions
+      } else {
+        Object.assign(where, conditions[0])
+      }
+    } else {
       where.approved = true
     }
     
