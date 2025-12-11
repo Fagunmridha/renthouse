@@ -2,37 +2,54 @@
 
 import { useEffect, useState, use } from "react"
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { AddPropertyForm } from "@/components/add-property-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getStoredProperties, getCurrentUser } from "@/lib/mock-data"
 import type { Property } from "@/lib/types"
 
 export default function EditPropertyPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const router = useRouter()
+  const { data: session } = useSession()
   const [property, setProperty] = useState<Property | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const user = getCurrentUser()
-    if (!user || (user.role !== "OWNER" && user.role !== "ADMIN")) {
+    if (!session?.user?.id) {
+      router.push("/login")
+      return
+    }
+
+    if (session.user.role !== "OWNER" && session.user.role !== "ADMIN") {
       router.push("/dashboard/my-properties")
       return
     }
     
-    const properties = getStoredProperties()
-    const found = properties.find((p) => p.id === id)
-
-    if (!found || (user.role !== "ADMIN" && found.ownerId !== user.id)) {
-      router.push("/dashboard/my-properties")
-      return
+    const fetchProperty = async () => {
+      try {
+        const response = await fetch(`/api/properties/${id}`)
+        if (response.ok) {
+          const found = await response.json()
+          if (session.user.role !== "ADMIN" && found.ownerId !== session.user.id) {
+            router.push("/dashboard/my-properties")
+            return
+          }
+          setProperty(found)
+        } else {
+          router.push("/dashboard/my-properties")
+        }
+      } catch (error) {
+        console.error("Error fetching property:", error)
+        router.push("/dashboard/my-properties")
+      } finally {
+        setLoading(false)
+      }
     }
 
-    setProperty(found)
-    setLoading(false)
-  }, [id, router])
+    fetchProperty()
+  }, [id, router, session])
 
   if (loading) {
     return (

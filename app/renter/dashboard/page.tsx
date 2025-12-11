@@ -119,30 +119,30 @@ export default function RenterDashboardPage() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="cursor-pointer hover:shadow-md transition-shadow" asChild>
-              <Link href="/renter/browse">
+            <Link href="/renter/browse">
+              <Card className="cursor-pointer hover:shadow-md transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-lg">Browse Properties</CardTitle>
                   <CardDescription>Explore available rentals</CardDescription>
                 </CardHeader>
-              </Link>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-md transition-shadow" asChild>
-              <Link href="/renter/favorites">
+              </Card>
+            </Link>
+            <Link href="/renter/favorites">
+              <Card className="cursor-pointer hover:shadow-md transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-lg">View Favorites</CardTitle>
                   <CardDescription>See your saved properties</CardDescription>
                 </CardHeader>
-              </Link>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-md transition-shadow" asChild>
-              <Link href="/renter/messages">
+              </Card>
+            </Link>
+            <Link href="/renter/messages">
+              <Card className="cursor-pointer hover:shadow-md transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-lg">Messages</CardTitle>
                   <CardDescription>Check your inquiries</CardDescription>
                 </CardHeader>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
           </div>
         </CardContent>
       </Card>

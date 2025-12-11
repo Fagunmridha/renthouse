@@ -2,7 +2,6 @@ import { readFile, writeFile, mkdir } from "fs/promises"
 import { join } from "path"
 import { existsSync } from "fs"
 import type { Property } from "./types"
-import { mockProperties } from "./mock-data"
 
 const DATA_DIR = join(process.cwd(), "data")
 const PROPERTIES_FILE = join(DATA_DIR, "properties.json")
@@ -17,8 +16,7 @@ export async function getServerProperties(): Promise<Property[]> {
   await ensureDataDir()
   
   if (!existsSync(PROPERTIES_FILE)) {
-    await saveServerProperties(mockProperties)
-    return mockProperties
+    return []
   }
 
   try {
@@ -30,7 +28,7 @@ export async function getServerProperties(): Promise<Property[]> {
     }))
   } catch (error) {
     console.error("Error reading properties file:", error)
-    return mockProperties
+    return []
   }
 }
 
